@@ -8,6 +8,8 @@ import java.util.function.Function;
 
 public class Functions {
 
+    private Functions(){ }
+
     public static Function<Date, String> getTimestampMilliSecond =
             (date) -> (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")).format(date);
 
@@ -28,5 +30,20 @@ public class Functions {
         if(serverName.indexOf("dev") == 0) return "DE";
         if(serverName.indexOf("localhost") == 0) return "LO";
         return "UN"; // unknown server name
+    };
+
+    public static Function<Integer, String> randomStr = (length) -> {
+        Random random = new Random();
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            int choice = random.nextInt(3);
+            switch(choice) {
+                case 0: str.append((char)(random.nextInt(25)+97)); break;
+                case 1: str.append((char)(random.nextInt(25) +65)); break;
+                case 2: str.append((char)(random.nextInt(10) +48)); break;
+                default:
+            }
+        }
+        return str.toString();
     };
 }

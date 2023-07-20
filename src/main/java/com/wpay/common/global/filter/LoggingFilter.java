@@ -14,7 +14,7 @@ import java.io.IOException;
 @Order(1)
 @WebFilter(urlPatterns = "/*")
 @RequiredArgsConstructor
-class LoggingFilter implements Filter {
+public class LoggingFilter implements Filter {
 
     private final HttpServletRequest httpServletRequest;
 
