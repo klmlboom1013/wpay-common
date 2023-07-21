@@ -2,15 +2,12 @@ package com.wpay.common.global.crypto;
 
 import lombok.Getter;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
+import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -35,7 +32,11 @@ public final class CryptoAES256 {
         this.iv = new IvParameterSpec(IV_HINT.getBytes(StandardCharsets.UTF_8));
     }
 
-    public String encrypt(String plainText) {
+    public String encrypt(String plainText){
+     return this.encrypt(plainText, StandardCharsets.UTF_8);
+    }
+
+    public String encrypt(String plainText, Charset charset) {
         Cipher cipher;
         try {
             cipher = Cipher.getInstance(AES_ALGORITHM);
@@ -50,7 +51,8 @@ public final class CryptoAES256 {
         }
 
         int blockSize = 128; //block size
-        byte[] dataBytes = plainText.getBytes(StandardCharsets.UTF_8);
+        byte[] dataBytes;
+        dataBytes = plainText.getBytes(charset);
 
         int plaintextLength = dataBytes.length;
         int fillChar = ((blockSize - (plaintextLength % blockSize)));
@@ -83,6 +85,10 @@ public final class CryptoAES256 {
     }
 
     public String decrypt(String encText) {
+        return this.decrypt(encText, StandardCharsets.UTF_8);
+    }
+
+    public String decrypt(String encText, Charset charset) {
         Cipher cipher;
         try {
             cipher = Cipher.getInstance(AES_ALGORITHM);
@@ -117,6 +123,9 @@ public final class CryptoAES256 {
         byte[] origin = new byte[aesdecode.length - (aesdecode[aesdecode.length - 1])];
         System.arraycopy(aesdecode, 0, origin, 0, origin.length);
 
-        return new String(origin, StandardCharsets.UTF_8);
+        String result;
+        result = new String(origin, charset);
+
+        return result;
     }
 }

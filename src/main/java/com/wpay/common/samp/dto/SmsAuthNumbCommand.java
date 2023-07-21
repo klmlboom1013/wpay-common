@@ -17,7 +17,7 @@ import javax.validation.constraints.Size;
 public class SmsAuthNumbCommand extends MobiliansCommand<SmsAuthNumbCommand> {
 
     /** 이름 */
-    @Crypto(isEncrypt = false)
+    @Crypto(type = Crypto.Type.DECRYPTION, algorithm = Crypto.Algorithm.AES256)
     @Setter
     @NotBlank(message = "값이 Null이 될 수 없습니다.")
     @Size(max = 30, message = "길이는 최대 30 자리 입니다.")

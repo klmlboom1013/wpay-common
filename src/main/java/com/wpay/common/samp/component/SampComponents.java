@@ -16,6 +16,7 @@ public class SampComponents {
     public void sampRun() {
         SmsAuthNumbCommand command = new SmsAuthNumbCommand();
         command.setUserNm("d3BheWNvcmVtb2R1bGUwMGrvFq94OmkE1Zfny26ObAhUOQBXSh5w0xABDGvH/ZRkDw5S1CKG/X6uUo57E8jpCKsrPFhT8hFOS8dencmDzDzLkqesJND4fkeV20dRBZlQPjaG+Xk8SRa/BkJeXD0Y34sXWne1bwtD3SBS4BqTew28qPAX2IsD9QYuEjHMoNYabdm85jRHBhm3HXZorB7aZA==");
-        command.resetFieldDataCrypto(command);
+        command.resetFieldDataCrypto();
+        log.info("이름 복호화 진행 결과: {}",command.getUserNm());
     }
 }
