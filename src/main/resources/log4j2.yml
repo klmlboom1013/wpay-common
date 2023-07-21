@@ -22,7 +22,7 @@ Configutation:
     RollingFile:
       name: RollingFile_Appender
       fileName: ${log-path}/wpay-core-mobilians.log
-      filePattern: "logs/archive/wpay-core-mpi.log.%d{yyyy-MM-dd-hh-mm}_%i.gz"
+      filePattern: "logs/archive/wpay-common.log.%d{yyyy-MM-dd-hh-mm}_%i.gz"
       PatternLayout:
         charset: ${charset-UTF-8}
         pattern: ${pattern}
