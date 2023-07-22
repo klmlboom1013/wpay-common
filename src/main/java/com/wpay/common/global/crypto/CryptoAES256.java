@@ -1,6 +1,7 @@
 package com.wpay.common.global.crypto;
 
 import lombok.Getter;
+import lombok.extern.log4j.Log4j2;
 
 import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;
@@ -16,6 +17,7 @@ import java.util.Arrays;
 import java.util.Base64;
 
 
+@Log4j2
 public final class CryptoAES256 {
 
     @Getter private static final CryptoAES256 instance = new CryptoAES256();
@@ -37,6 +39,8 @@ public final class CryptoAES256 {
     }
 
     public String encrypt(String plainText, Charset charset) {
+        log.debug("--- AES256 Encrypt Start --- \n  [plainText: {}]\n  [charset: {}]", plainText, charset.name());
+
         Cipher cipher;
         try {
             cipher = Cipher.getInstance(AES_ALGORITHM);
@@ -89,6 +93,7 @@ public final class CryptoAES256 {
     }
 
     public String decrypt(String encText, Charset charset) {
+
         Cipher cipher;
         try {
             cipher = Cipher.getInstance(AES_ALGORITHM);
