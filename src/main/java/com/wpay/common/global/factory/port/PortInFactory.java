@@ -5,7 +5,6 @@ import com.wpay.common.global.exception.CustomException;
 import com.wpay.common.global.exception.ErrorCode;
 import com.wpay.common.global.factory.port.in.BaseInPort;
 import com.wpay.common.global.factory.port.in.UseCasePort;
-import com.wpay.common.global.factory.port.out.BaseOutPort;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.util.CollectionUtils;
