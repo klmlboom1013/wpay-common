@@ -1,7 +1,6 @@
 package com.wpay.common.templates.adapter.out.persistence;
 
 import com.wpay.common.global.annotation.PersistenceAdapter;
-import com.wpay.common.templates.application.port.out.DefaultExternalMapper;
 import com.wpay.common.templates.application.port.out.DefaultPersistenceMapper;
 import com.wpay.common.templates.application.port.out.persistence.DefaultPersistencePort;
 import com.wpay.common.templates.domain.ActivityDefault;
