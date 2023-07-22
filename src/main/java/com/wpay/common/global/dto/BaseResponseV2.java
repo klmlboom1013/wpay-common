@@ -9,18 +9,21 @@ import java.util.Date;
 
 @Getter
 @ToString
-public class BaseResponse {
+public class BaseResponseV2 {
     private final String timestamp;
     private final Integer status;
     private final String message;
     private final Object data;
 
+    @Setter
+    private String path;
+
     @Builder
-    private BaseResponse(@NonNull HttpStatus httpStatus, Object data) {
+    private BaseResponseV2(@NonNull HttpStatus httpStatus, Object data){
         this.timestamp = Functions.getTimestampMilliSecond.apply(new Date());
-        this.status = httpStatus.value();
-        this.message = httpStatus.getReasonPhrase();
-        this.data = data;
+        this.status=httpStatus.value();
+        this.message=httpStatus.getReasonPhrase();
+        this.data=data;
     }
 
     @Value
