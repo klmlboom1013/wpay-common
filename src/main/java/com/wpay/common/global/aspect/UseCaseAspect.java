@@ -7,27 +7,27 @@ import org.springframework.stereotype.Component;
 
 @Log4j2
 @Aspect
-@Component(value = "mobiliansUseCaseAspect")
+@Component
 public class UseCaseAspect implements BaseAspect {
-    @Before("execution(* com.wpay.*.*.application.service.*.*UseCase(..))")
+    @Before("execution(* com.wpay.*.*.application.service.*Service.*UseCase(..))")
     @Override
     public void before(JoinPoint joinPoint) {
         log.debug("[Before] => {}", joinPoint.getSignature().getName());
     }
 
-    @After("execution(* com.wpay.*.*.application.service.*.*UseCase(..))")
+    @After("execution(* com.wpay.*.*.application.service.*Service.*UseCase(..))")
     @Override
     public void after(JoinPoint joinPoint) {
         log.debug("[After] => {}", joinPoint.getSignature().getName());
     }
 
-    @AfterReturning(pointcut = "execution(* com.wpay.*.*.application.service.*.*UseCase(..))", returning = "result")
+    @AfterReturning(pointcut = "execution(* com.wpay.*.*.application.service.*Service.*UseCase(..))", returning = "result")
     @Override
     public void afterReturning(JoinPoint joinPoint, Object result) {
         log.debug("[AfterReturning] => {} [result] => {}", joinPoint.getSignature().getName(), result);
     }
 
-    @AfterThrowing(pointcut = "execution(* com.wpay.*.*.application.service.*.*UseCase(..))", throwing = "e")
+    @AfterThrowing(pointcut = "execution(* com.wpay.*.*.application.service.*Service.*UseCase(..))", throwing = "e")
     @Override
     public void afterThrowing(JoinPoint joinPoint, Throwable e) {
         log.error("[AfterThrowing] => {} [{}] => {}", joinPoint.getSignature().getName(), e.getClass().getName(), e.getMessage());
