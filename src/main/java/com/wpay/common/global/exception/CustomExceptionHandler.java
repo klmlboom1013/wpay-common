@@ -1,9 +1,7 @@
-package com.wpay.common.templates.global.exception;
+package com.wpay.common.global.exception;
 
 import com.wpay.common.global.dto.ErrorResponse;
 import com.wpay.common.global.dto.ErrorResponseV2;
-import com.wpay.common.global.exception.CustomException;
-import com.wpay.common.global.exception.ErrorCode;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +14,7 @@ import javax.validation.ConstraintViolationException;
 
 @Log4j2
 @RestControllerAdvice(basePackages = "com.wpay.core.mobilians")
-public class DefaultExceptionHandler {
+public class CustomExceptionHandler {
 
     @ExceptionHandler({ CustomException.class })
     protected ResponseEntity<?> handleCustomException(CustomException ex) {
