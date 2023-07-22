@@ -1,4 +1,4 @@
-package com.wpay.common.samp.component;
+package com.wpay.common.templates.adapter.in.web;
 
 import com.wpay.common.global.annotation.Crypto;
 import com.wpay.common.global.dto.SelfCrypto;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Log4j2
 @RestController
-public class SampComponents {
+public class SampleTestRestController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/crypto/aes/enc")
@@ -36,8 +36,7 @@ public class SampComponents {
     @ToString
     @EqualsAndHashCode(callSuper = false)
     static class CryptEncryptDto extends SelfCrypto {
-        // 암호화
-        @Crypto(type = Crypto.Type.ENCRYPTION, algorithm = Crypto.Algorithm.AES256)
+        @Crypto(type = Crypto.Type.ENCRYPTION, algorithm = Crypto.Algorithm.AES256) // 암호화
         @Getter
         private String data;
     }
@@ -45,8 +44,7 @@ public class SampComponents {
     @ToString
     @EqualsAndHashCode(callSuper = false)
     static class CryptDecryptDto extends SelfCrypto {
-        // 복호화
-        @Crypto(type = Crypto.Type.DECRYPTION, algorithm = Crypto.Algorithm.AES256)
+        @Crypto(type = Crypto.Type.DECRYPTION, algorithm = Crypto.Algorithm.AES256) // 복호화
         @Getter
         private String data;
     }

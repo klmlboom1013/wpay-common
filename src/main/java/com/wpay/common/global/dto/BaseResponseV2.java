@@ -15,8 +15,7 @@ public class BaseResponseV2 {
     private final String message;
     private final Object data;
 
-    @Setter
-    private String path;
+    @Setter private String path;
 
     @Builder
     private BaseResponseV2(@NonNull HttpStatus httpStatus, Object data){

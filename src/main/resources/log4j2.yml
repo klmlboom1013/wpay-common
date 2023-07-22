@@ -21,14 +21,14 @@ Configutation:
         disableAnsi: false
     RollingFile:
       name: RollingFile_Appender
-      fileName: ${log-path}/wpay-core-mobilians.log
-      filePattern: "logs/archive/wpay-common.log.%d{yyyy-MM-dd-hh-mm}_%i.gz"
+      fileName: ${log-path}/wpay-common.log
+      filePattern: "logs/archive/wpay-common.log.%d{yyyy-MM-dd-HH-mm}_%i.gz"
       PatternLayout:
         charset: ${charset-UTF-8}
         pattern: ${pattern}
       Policies:
         SizeBasedTriggeringPolicy:
-          size: "200KB"
+          size: "500MB"
         TimeBasedTriggeringPolicy:
           interval: "1"
       DefaultRollOverStrategy:
@@ -42,7 +42,7 @@ Configutation:
         - ref: RollingFile_Appender
     Logger:
       #name: example.demospringboot
-      name: com.wpay.common
+      name: com.wpay
       additivity: false
       level: debug
       AppenderRef:
