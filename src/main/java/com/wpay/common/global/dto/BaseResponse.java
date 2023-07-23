@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Getter
 @ToString
-public class BaseResponseV2 {
+public class BaseResponse {
     private final String timestamp;
     private final Integer status;
     private final String message;
@@ -18,7 +18,7 @@ public class BaseResponseV2 {
     @Setter private String path;
 
     @Builder
-    private BaseResponseV2(@NonNull HttpStatus httpStatus, Object data){
+    private BaseResponse(@NonNull HttpStatus httpStatus, Object data){
         this.timestamp = Functions.getTimestampMilliSecond.apply(new Date());
         this.status=httpStatus.value();
         this.message=httpStatus.getReasonPhrase();

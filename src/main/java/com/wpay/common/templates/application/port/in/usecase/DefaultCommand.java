@@ -2,6 +2,7 @@ package com.wpay.common.templates.application.port.in.usecase;
 
 import com.wpay.common.global.dto.BaseCommand;
 import com.wpay.common.global.enums.JobCodes;
+import com.wpay.common.templates.global.enums.DefaultVersion;
 import lombok.*;
 
 /**
@@ -18,13 +19,12 @@ public class DefaultCommand extends BaseCommand<DefaultCommand> {
     private String data2;
 
     @Override
-    public boolean checkVersion(String version) {
-        return false;
+    public void checkVersion(String version) {
+        DefaultVersion.getInstance(version);
     }
 
     @Override
     public JobCodes getJobCodes() {
-        // TODO: API 업무 코드 지정.
-        return null;
+        return JobCodes.JOB_CODE_ZZ;
     }
 }

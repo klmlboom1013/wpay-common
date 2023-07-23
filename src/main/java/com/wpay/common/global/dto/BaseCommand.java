@@ -33,7 +33,7 @@ public abstract class BaseCommand<T> extends SelfValidating<T> {
     }
 
     /** API URL @PathVariable "version" 값 검증. */
-    public abstract boolean checkVersion(String version);
+    public abstract void checkVersion(String version);
 
     /** MobiliansJobCode 리턴 */
     public abstract JobCodes getJobCodes();

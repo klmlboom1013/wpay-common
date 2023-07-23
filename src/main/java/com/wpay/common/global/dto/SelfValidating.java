@@ -10,7 +10,7 @@ import javax.validation.ValidatorFactory;
 import java.util.Set;
 
 @Log4j2
-public abstract class SelfValidating<T> extends SelfCrypto implements BaseValidation {
+public abstract class SelfValidating<T> extends SelfCrypto {
 
   private final Validator validator;
 
@@ -24,11 +24,14 @@ public abstract class SelfValidating<T> extends SelfCrypto implements BaseValida
    * Evaluates all Bean Validations on the attributes of this
    * instance.
    */
-  @Override
   public void validateSelf() {
-    this.resetFieldDataCrypto();
     Set<ConstraintViolation<T>> violations = validator.validate((T) this);
     if (Boolean.FALSE.equals(violations.isEmpty()))
       throw new ConstraintViolationException(violations);
+  }
+
+  public void validateCryptoSelf() {
+    this.resetFieldDataCrypto();
+    this.validateSelf();
   }
 }

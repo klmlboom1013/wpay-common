@@ -1,7 +1,7 @@
 package com.wpay.common.templates.application.service;
 
 import com.wpay.common.global.annotation.UseCase;
-import com.wpay.common.global.dto.BaseResponseV2;
+import com.wpay.common.global.dto.BaseResponse;
 import com.wpay.common.global.enums.JobCodes;
 import com.wpay.common.global.factory.port.PortOutFactory;
 import com.wpay.common.templates.application.port.in.usecase.DefaultUseCasePort;
@@ -17,7 +17,7 @@ import org.springframework.http.HttpStatus;
 @Log4j2
 @UseCase
 @RequiredArgsConstructor
-public class DefaultUseCase implements DefaultUseCasePort {
+public class DefaultService implements DefaultUseCasePort {
 
     private final PortOutFactory portOutFactory;
 
@@ -33,7 +33,7 @@ public class DefaultUseCase implements DefaultUseCasePort {
     }
 
     @Override
-    public BaseResponseV2 defaultRun(ActivityDefault activity) {
+    public BaseResponse defaultRun(ActivityDefault activity) {
 
         // TODO: business 로직 구현
         final DefaultExternalPort defaultExternalPort = this.getExternalPort();
@@ -42,9 +42,9 @@ public class DefaultUseCase implements DefaultUseCasePort {
         final DefaultExternalMapper externalMapper = defaultExternalPort.defaultRun(activity);
         final DefaultExternalMapper persistenceMapper = defaultExternalPort.defaultRun(activity);
 
-        return BaseResponseV2.builder()
+        return BaseResponse.builder()
                 .httpStatus(HttpStatus.OK)
-                .data(BaseResponseV2.DefaultData.builder()
+                .data(BaseResponse.DefaultData.builder()
                         .wtid("")
                         .mid("")
                         .build())

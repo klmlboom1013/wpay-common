@@ -33,7 +33,7 @@ public abstract class SelfCrypto {
                     throw new RuntimeException(e);
                 }
             } else {
-                throw new RuntimeException("지원 하지 않는 암호 알고리즘 입니다.");
+                throw new RuntimeException("지원 하지 않는 암호알고리즘 입니다.");
             }
         }
     }

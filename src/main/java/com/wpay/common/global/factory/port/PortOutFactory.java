@@ -3,8 +3,6 @@ package com.wpay.common.global.factory.port;
 import com.wpay.common.global.annotation.Factory;
 import com.wpay.common.global.exception.CustomException;
 import com.wpay.common.global.exception.ErrorCode;
-import com.wpay.common.global.factory.port.in.BaseInPort;
-import com.wpay.common.global.factory.port.out.BaseOutPort;
 import com.wpay.common.global.factory.port.out.ExternalPort;
 import com.wpay.common.global.factory.port.out.PersistencePort;
 import lombok.NonNull;
@@ -30,22 +28,28 @@ public class PortOutFactory extends BasePortFactory {
 
         externalPorts.forEach(out -> {
             final String key = this.makeMapperKey(out.getVersionCode().toString(), out.getJobCode().toString(),out.getPortDvdCode().toString());
+            log.debug(">> Registration PortOutFactory ExternalPort KEY: {}", key);
             this.portMapper.put(key, out);
         });
 
         persistencePorts.forEach(out -> {
             final String key = this.makeMapperKey(out.getVersionCode().toString(), out.getJobCode().toString(),out.getPortDvdCode().toString());
+            log.debug(">> Registration PortOutFactory PersistencePort KEY: {}", key);
             this.portMapper.put(key, out);
         });
     }
 
     public ExternalPort getExternalPort (@NonNull String version, @NonNull String jobCodes) {
         final String key = this.makeMapperKey(version, jobCodes, PortDvdCode.external.toString());
-        return (ExternalPort) Objects.requireNonNull(this.portMapper.get(key), "portMapper 에 저장된 Bean 이 없습니다.");
+        log.debug(">> Fetch PortOutFactory ExternalPort KEY: {}", key);
+        return (ExternalPort) Objects.requireNonNull(this.portMapper.get(key),
+                "PortOutFactory.portMapper 에서 조건에 맞는 ExternalPort를 찾지 못 했습니다.");
     }
 
     public PersistencePort getPersistencePort (@NonNull String version, @NonNull String jobCodes) {
         final String key = this.makeMapperKey(version, jobCodes, PortDvdCode.persistence.toString());
-        return (PersistencePort) Objects.requireNonNull(this.portMapper.get(key), "portMapper 에 저장된 Bean 이 없습니다.");
+        log.debug(">> Fetch PortOutFactory PersistencePort KEY: {}", key);
+        return (PersistencePort) Objects.requireNonNull(this.portMapper.get(key),
+                "PortOutFactory.portMapper 에서 조건에 맞는 PersistencePort를 찾지 못 했습니다.");
     }
 }
