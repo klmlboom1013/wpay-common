@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Log4j2
 public abstract class BaseAspect {
@@ -24,9 +25,12 @@ public abstract class BaseAspect {
     public abstract void afterThrowing(JoinPoint joinPoint, Throwable e);
 
     protected void validateCryptoSelf(JoinPoint joinPoint, boolean cryptoFlag){
+        log.debug("DTO Validation 검증 및 데이터 암복호화를 시작 합니다.");
+        AtomicBoolean isPlay = new AtomicBoolean(false);
         Arrays.stream(joinPoint.getArgs()).anyMatch(o -> {
             /* SelfCrypto 을 상속 받지 않았으면 continue */
             if ((Boolean.FALSE.equals(o instanceof SelfValidating))) return false;
+            isPlay.set(true);
             final SelfValidating<?> selfValidating = (SelfValidating<?>) o;
             /* validation Crypto check */
             if(cryptoFlag)
@@ -36,24 +40,34 @@ public abstract class BaseAspect {
             log.info("Validation check success!! \n[{}]", o.toString());
             return true;
         });
+        if(Boolean.FALSE.equals(isPlay.get()))
+            log.debug("DTO Validation 검증 및 데이터 암복호화 진행 대상이 없습니다.");
     }
 
     protected void cryptoSelf(JoinPoint joinPoint){
+        log.debug("DTO 데이터 암복호화를 시작 합니다.");
+        AtomicBoolean isPlay = new AtomicBoolean(false);
         Arrays.stream(joinPoint.getArgs()).anyMatch(o -> {
             /* SelfCrypto 을 상속 받지 않았으면 continue */
             if ((Boolean.FALSE.equals(o instanceof SelfCrypto))) return false;
+            isPlay.set(true);
             final SelfCrypto selfCrypto = (SelfCrypto) o;
             /* validation Crypto check */
             selfCrypto.resetFieldDataCrypto();
-            log.info("Validation check success!! \n[{}]", o.toString());
+            log.info("Crypto success!! \n[{}]", o.toString());
             return true;
         });
+        if(Boolean.FALSE.equals(isPlay.get()))
+            log.debug("DTO 데이터 암복호화 진행 대상이 없습니다.");
     }
 
     protected void baseCommandValidateCryptoSelf (JoinPoint joinPoint, HttpServletRequest request) {
+        log.debug("CommandDTO Validation 검증 및 데이터 암복호화를 시작 합니다.");
+        AtomicBoolean isPlay = new AtomicBoolean(false);
         Arrays.stream(joinPoint.getArgs()).anyMatch(o -> {
             /* SelfCrypto 을 상속 받지 않았으면 continue */
             if ((Boolean.FALSE.equals(o instanceof BaseCommand))) return false;
+            isPlay.set(true);
             log.info("RequestBody Command : \n[{}]", o.toString());
             final BaseCommand<?> baseCommand = (BaseCommand<?>) o;
             /* API Call Version 확인 */
@@ -65,6 +79,8 @@ public abstract class BaseAspect {
             log.info("Validation check success!! \n[{}]", o.toString());
             return true;
         });
+        if(Boolean.FALSE.equals(isPlay.get()))
+            log.debug("CommandDTO Validation 검증 및 데이터 암복호화 진행 대상이 없습니다.");
     }
 
     protected void resultSetUriPath(Object result, HttpServletRequest request) {
@@ -77,20 +93,27 @@ public abstract class BaseAspect {
             log.warn("ResponseEntity 또는 ResponseEntity.body 가 Null 이므로 path 값 세팅이 불가능 합니다.");
             return;
         }
+
         final ResponseEntity<?> responseEntity = (ResponseEntity<?>) result;
         final Object body = responseEntity.getBody();
-        log.info("Result Object body Name: {}", body.getClass().getSimpleName());
+        log.debug("ResponseEntity.body 에 path 세팅을 시작 합니다. [{}]", body.getClass().getSimpleName());
         // Body 에 path 세팅
         final Class<?> clazz = body.getClass();
+        AtomicBoolean isPlay = new AtomicBoolean(false);
         Arrays.stream(clazz.getDeclaredMethods()).iterator().forEachRemaining(f ->{
             if("setPath".equals(f.getName())) {
+                isPlay.set(true);
                 try {
                     f.invoke(body, request.getRequestURI());
+                    log.info("ResultDTO API URI Path 세팅 완료. [{}]", body.toString());
                 } catch (IllegalAccessException | InvocationTargetException e) {
+                    isPlay.set(false);
                     log.error("{} - {}", e.getClass().getSimpleName(), e.getMessage());
                     throw new CustomException(ErrorCode.INTERNAL_SERVER_ERROR, "ResponseEntity.body 에 path 세팅 중 오류가 발생 했습니다.", e);
                 }
             }
         });
+        if(Boolean.FALSE.equals(isPlay.get()))
+            log.debug("ResponseEntity.body 에 path 세팅 대상 method 가 없습니다. [{}]", result.getClass().getSimpleName());
     }
 }

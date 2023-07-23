@@ -11,14 +11,22 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.validation.ConstraintViolationException;
+import java.util.Arrays;
+import java.util.Objects;
 
 @Log4j2
-@RestControllerAdvice(basePackages = "com.wpay.core.mobilians")
+@RestControllerAdvice(basePackages = "com.wpay")
 public class CustomExceptionHandler {
 
     @ExceptionHandler({ CustomException.class })
     protected ResponseEntity<?> handleCustomException(CustomException ex) {
-        this.logWriteExceptionStackTrace(ex);
+        log.error("[{}][{}] CustomException: status:{} - {}", ex.getMid(), ex.getWtid(), ex.getErrorCode(), ex.getMessage());
+        if(Objects.nonNull(ex.getE())) {
+            this.logWriteExceptionStackTrace(ex.getE());
+        } else {
+            this.logWriteExceptionStackTrace(ex);
+        }
+
         /* ex에 wtid 또는 mid가 있다면 ErrorResponseV2로 세팅 한다. */
         if(Strings.isNotBlank(ex.getWtid()) || Strings.isNotBlank(ex.getMid())){
             ErrorResponseV2 errorResponseV2 = ErrorResponseV2.builder()
@@ -84,11 +92,18 @@ public class CustomExceptionHandler {
     }
 
     private void logWriteExceptionStackTrace(Throwable e){
-        final StringBuilder sb = new StringBuilder(e.getClass().getSimpleName()).append(": ").append(e.getMessage()).append("\n");
-        for(StackTraceElement se : e.getStackTrace()) {
-            sb.append("    ").append(se.getClassName()).append("(")
-                    .append(se.getMethodName()).append(":").append(se.getLineNumber()).append(")").append("\n");
+        if(e instanceof CustomException) {
+            CustomException ex = (CustomException) e;
+            log.error("[{}][{}] CustomException: status:{} - {}", ex.getMid(), ex.getWtid(), ex.getErrorCode(), ex.getMessage());
+        } else {
+            log.error("{} - {}", e.getClass().getSimpleName(), e.getMessage());
         }
+        final StringBuilder sb = new StringBuilder("Print Stack Trace: \n");
+        Arrays.stream(e.getStackTrace()).iterator().forEachRemaining(
+                se -> sb.append("    ")
+                        .append(se.getClassName()).append("(")
+                        .append(se.getMethodName()).append(":")
+                        .append(se.getLineNumber()).append(")").append("\n"));
         log.error(sb.toString());
     }
 }
