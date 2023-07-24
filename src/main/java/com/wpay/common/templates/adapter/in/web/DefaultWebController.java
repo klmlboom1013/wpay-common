@@ -1,7 +1,7 @@
 package com.wpay.common.templates.adapter.in.web;
 
 import com.wpay.common.global.annotation.WebAdapter;
-import com.wpay.common.global.factory.port.PortInFactory;
+import com.wpay.common.global.port.PortInFactory;
 import com.wpay.common.templates.application.port.in.usecase.DefaultCommand;
 import com.wpay.common.templates.global.enums.DefaultVersion;
 import lombok.RequiredArgsConstructor;

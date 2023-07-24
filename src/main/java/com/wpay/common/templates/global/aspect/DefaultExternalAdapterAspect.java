@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Log4j2
 @Aspect
 @Component(value = "defaultExternalAdapterAspect")
-public class ExternalAdapterAspect extends BaseAspect {
+public class DefaultExternalAdapterAspect extends BaseAspect {
     @Before("execution(* com.wpay.common.templates.adapter.out.external.*External.*Run(..))")
     @Override
     public void before(JoinPoint joinPoint) {

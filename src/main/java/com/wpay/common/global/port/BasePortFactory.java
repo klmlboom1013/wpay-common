@@ -1,4 +1,4 @@
-package com.wpay.common.global.factory.port;
+package com.wpay.common.global.port;
 
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;

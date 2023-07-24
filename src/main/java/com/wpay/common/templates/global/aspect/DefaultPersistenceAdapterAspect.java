@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Log4j2
 @Aspect
 @Component(value = "defaultPersistenceAdapterAspect")
-public class PersistenceAdapterAspect extends BaseAspect {
+public class DefaultPersistenceAdapterAspect extends BaseAspect {
 
     @Before("execution(* com.wpay.common.templates.adapter.out.persistence.*Persistence.*Run(..))")
     @Override

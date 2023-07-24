@@ -3,7 +3,7 @@ package com.wpay.common.templates.application.service;
 import com.wpay.common.global.annotation.UseCase;
 import com.wpay.common.global.dto.BaseResponse;
 import com.wpay.common.global.enums.JobCodes;
-import com.wpay.common.global.factory.port.PortOutFactory;
+import com.wpay.common.global.port.PortOutFactory;
 import com.wpay.common.templates.application.port.in.usecase.DefaultUseCasePort;
 import com.wpay.common.templates.application.port.out.DefaultExternalMapper;
 import com.wpay.common.templates.application.port.out.external.DefaultExternalPort;

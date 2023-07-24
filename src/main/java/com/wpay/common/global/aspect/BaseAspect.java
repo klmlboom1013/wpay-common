@@ -7,7 +7,9 @@ import com.wpay.common.global.dto.SelfValidating;
 import com.wpay.common.global.exception.CustomException;
 import com.wpay.common.global.exception.ErrorCode;
 import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.util.Strings;
 import org.aspectj.lang.JoinPoint;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Log4j2
 public abstract class BaseAspect {
@@ -62,6 +65,17 @@ public abstract class BaseAspect {
     }
 
     protected void baseCommandValidateCryptoSelf (JoinPoint joinPoint, HttpServletRequest request) {
+        log.debug("http header 미디어타입을 검증을 시작 합니다.");
+        AtomicReference<String> contentType = new AtomicReference<>();
+        request.getHeaderNames().asIterator().forEachRemaining(key -> {
+            if(key.equalsIgnoreCase("content-type")){
+                contentType.set(request.getHeader(key));
+            }
+        });
+        if(Strings.isBlank(contentType.get()) || Boolean.FALSE.equals(contentType.get().contentEquals(MediaType.APPLICATION_JSON_VALUE))){
+            throw new CustomException(ErrorCode.HTTP_STATUS_415);
+        }
+
         log.debug("CommandDTO Validation 검증 및 데이터 암복호화를 시작 합니다.");
         AtomicBoolean isPlay = new AtomicBoolean(false);
         Arrays.stream(joinPoint.getArgs()).anyMatch(o -> {

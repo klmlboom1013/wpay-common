@@ -7,10 +7,11 @@ import org.springframework.http.HttpStatus;
 
 import java.util.Date;
 
+
 @Getter
 @ToString
 public class BaseResponse {
-    private final String timestamp;
+    private final String timestamp = Functions.getTimestampMilliSecond.apply(new Date());
     private final Integer status;
     private final String message;
     private final Object data;
@@ -19,7 +20,6 @@ public class BaseResponse {
 
     @Builder
     private BaseResponse(@NonNull HttpStatus httpStatus, Object data){
-        this.timestamp = Functions.getTimestampMilliSecond.apply(new Date());
         this.status=httpStatus.value();
         this.message=httpStatus.getReasonPhrase();
         this.data=data;

@@ -10,14 +10,13 @@ import java.util.Date;
 @Getter
 @ToString
 public class BaseNoDataResponse {
-    private final String timestamp;
+    private final String timestamp = Functions.getTimestampMilliSecond.apply(new Date());
     private final Integer status;
     private final String message;
     @Setter private String path;
 
     @Builder
     private BaseNoDataResponse(@NonNull HttpStatus httpStatus) {
-        this.timestamp = Functions.getTimestampMilliSecond.apply(new Date());
         this.status = httpStatus.value();
         this.message = httpStatus.getReasonPhrase();
     }

@@ -1,7 +1,7 @@
-package com.wpay.common.global.factory.port.in;
+package com.wpay.common.global.port.in;
 
 
-import com.wpay.common.global.factory.port.PortDvdCode;
+import com.wpay.common.global.port.PortDvdCode;
 
 public interface BaseInPort {
     Object getJobCode();

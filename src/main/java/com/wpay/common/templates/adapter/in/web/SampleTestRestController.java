@@ -8,17 +8,14 @@ import lombok.ToString;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Log4j2
 @RestController
 public class SampleTestRestController {
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(path = "/crypto/aes/enc")
+    @PostMapping(path = "/crypto/aes/enc")
     public ResponseEntity<?> sampRun(@RequestBody CryptEncryptDto dto) {
         log.info(">> DTO : {} ", dto.toString());
         dto.resetFieldDataCrypto();

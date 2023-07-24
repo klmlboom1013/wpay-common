@@ -11,16 +11,26 @@ import java.util.Date;
 @ToString
 @EqualsAndHashCode
 public class ErrorResponse {
-    String timestamp;
+    String timestamp = Functions.getTimestampMilliSecond.apply(new Date());
     Integer status;
     String error;
     String message;
+    Object data;
 
     @Builder
-    public ErrorResponse(HttpStatus httpStatus, String error, String message) {
-        this.timestamp = Functions.getTimestampMilliSecond.apply(new Date());
+    public ErrorResponse(HttpStatus httpStatus, String error, String message, Object data) {
         this.status = httpStatus.value();
         this.error = error;
         this.message = message;
+        this.data=data;
+    }
+
+    @Value
+    @Builder
+    @AllArgsConstructor
+    @Getter
+    public static class DefaultData {
+        String wtid;
+        String mid;
     }
 }

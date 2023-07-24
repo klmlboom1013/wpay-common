@@ -3,7 +3,7 @@ package com.wpay.common.templates.application.port.in.usecase;
 import com.wpay.common.global.dto.BaseCommand;
 import com.wpay.common.global.dto.BaseResponse;
 import com.wpay.common.global.dto.SelfValidating;
-import com.wpay.common.global.factory.port.in.UseCasePort;
+import com.wpay.common.global.port.in.UseCasePort;
 import com.wpay.common.templates.domain.ActivityDefault;
 
 public interface DefaultUseCasePort extends UseCasePort {

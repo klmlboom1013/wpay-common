@@ -17,7 +17,7 @@ import java.util.Objects;
 @Aspect
 @Component(value = "defaultWebAdapterAspect")
 @RequiredArgsConstructor
-public class WebAdapterAspect extends BaseAspect {
+public class DefaultWebAdapterAspect extends BaseAspect {
 
     private final HttpServletRequest request;
 

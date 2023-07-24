@@ -1,7 +1,7 @@
 package com.wpay.common.templates.application.port.out.external;
 
 import com.wpay.common.global.enums.JobCodes;
-import com.wpay.common.global.factory.port.out.ExternalPort;
+import com.wpay.common.global.port.out.ExternalPort;
 import com.wpay.common.templates.application.port.out.DefaultExternalMapper;
 import com.wpay.common.templates.domain.ActivityDefault;
 

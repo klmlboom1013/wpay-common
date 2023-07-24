@@ -10,21 +10,16 @@ import java.util.Date;
 @Getter
 @ToString
 @EqualsAndHashCode
-public class ErrorResponseV2 {
-    String timestamp;
+public class ErrorNoDataResponse {
+    String timestamp = Functions.getTimestampMilliSecond.apply(new Date());
     Integer status;
     String error;
     String message;
-    String wtid;
-    String mid;
 
     @Builder
-    public ErrorResponseV2(HttpStatus httpStatus, String error, String message, String wtid, String mid) {
-        this.timestamp = Functions.getTimestampMilliSecond.apply(new Date());
+    public ErrorNoDataResponse(HttpStatus httpStatus, String error, String message) {
         this.status = httpStatus.value();
         this.error = error;
         this.message = message;
-        this.wtid=wtid;
-        this.mid=mid;
     }
 }
