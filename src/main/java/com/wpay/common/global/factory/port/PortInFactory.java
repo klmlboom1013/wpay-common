@@ -23,7 +23,7 @@ public class PortInFactory extends BasePortFactory {
     public PortInFactory(List<BaseInPort> inPorts) {
         if(CollectionUtils.isEmpty(inPorts)){
             log.error("BaseInPort Interface 가 구현된 Bean 을 찾지 못 했습니다.");
-            throw new CustomException(ErrorCode.INTERNAL_SERVER_ERROR);
+            throw new CustomException(ErrorCode.HTTP_STATUS_500);
         }
 
         inPorts.forEach(in -> {

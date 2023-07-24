@@ -109,7 +109,7 @@ public abstract class BaseAspect {
                 } catch (IllegalAccessException | InvocationTargetException e) {
                     isPlay.set(false);
                     log.error("{} - {}", e.getClass().getSimpleName(), e.getMessage());
-                    throw new CustomException(ErrorCode.INTERNAL_SERVER_ERROR, "ResponseEntity.body 에 path 세팅 중 오류가 발생 했습니다.", e);
+                    throw new CustomException(ErrorCode.HTTP_STATUS_500, "ResponseEntity.body 에 path 세팅 중 오류가 발생 했습니다.", e);
                 }
             }
         });

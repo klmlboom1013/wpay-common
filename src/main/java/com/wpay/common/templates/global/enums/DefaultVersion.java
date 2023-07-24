@@ -4,7 +4,6 @@ import com.wpay.common.global.exception.CustomException;
 import com.wpay.common.global.exception.ErrorCode;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 public enum DefaultVersion {
     v1;
@@ -20,6 +19,6 @@ public enum DefaultVersion {
             defaultVersions[0] = o;
             return true;
         })) { return defaultVersions[0]; }
-        throw new CustomException(ErrorCode.INVALID_PARAMETER, "URI Path parameter version: 지원 하지 않은 버전 입니다.");
+        throw new CustomException(ErrorCode.HTTP_STATUS_400, "URI Path parameter version: 지원 하지 않은 버전 입니다.");
     }
 }

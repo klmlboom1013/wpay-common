@@ -51,44 +51,44 @@ public class CustomExceptionHandler {
     protected ResponseEntity<?> handleServerException(ConstraintViolationException ex) {
         this.logWriteExceptionStackTrace(ex);
         ErrorResponse errorResponse = ErrorResponse.builder()
-                .httpStatus(ErrorCode.INVALID_PARAMETER.getStatus())
-                .message(Strings.isNotBlank(ex.getMessage()) ? ex.getMessage() : ErrorCode.INVALID_PARAMETER.getMessage())
-                .error(ErrorCode.INVALID_PARAMETER.getStatus().series().name().toLowerCase())
+                .httpStatus(ErrorCode.HTTP_STATUS_400.getStatus())
+                .message(Strings.isNotBlank(ex.getMessage()) ? ex.getMessage() : ErrorCode.HTTP_STATUS_400.getMessage())
+                .error(ErrorCode.HTTP_STATUS_400.getStatus().series().name().toLowerCase())
                 .build();
-        return ResponseEntity.status(ErrorCode.INVALID_PARAMETER.getStatus()).body(errorResponse);
+        return ResponseEntity.status(ErrorCode.HTTP_STATUS_400.getStatus()).body(errorResponse);
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     protected ResponseEntity<ErrorResponse> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException ex) {
         this.logWriteExceptionStackTrace(ex);
         ErrorResponse errorResponse = ErrorResponse.builder()
-                .httpStatus(ErrorCode.METHOD_NOT_ALLOWED.getStatus())
-                .message(ErrorCode.METHOD_NOT_ALLOWED.getMessage())
-                .error(ErrorCode.METHOD_NOT_ALLOWED.getStatus().series().name().toLowerCase())
+                .httpStatus(ErrorCode.HTTP_STATUS_405.getStatus())
+                .message(ErrorCode.HTTP_STATUS_405.getMessage())
+                .error(ErrorCode.HTTP_STATUS_405.getStatus().series().name().toLowerCase())
                 .build();
-        return ResponseEntity.status(ErrorCode.METHOD_NOT_ALLOWED.getStatus()).body(errorResponse);
+        return ResponseEntity.status(ErrorCode.HTTP_STATUS_405.getStatus()).body(errorResponse);
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)
     protected ResponseEntity<ErrorResponse> handleNoHandlerFoundExceptionException(NoHandlerFoundException ex) {
         this.logWriteExceptionStackTrace(ex);
         ErrorResponse errorResponse = ErrorResponse.builder()
-                .httpStatus(ErrorCode.DISPLAY_NOT_FOUND.getStatus())
-                .message(ErrorCode.DISPLAY_NOT_FOUND.getMessage())
-                .error(ErrorCode.DISPLAY_NOT_FOUND.getStatus().series().name().toLowerCase())
+                .httpStatus(ErrorCode.HTTP_STATUS_404.getStatus())
+                .message(ErrorCode.HTTP_STATUS_404.getMessage())
+                .error(ErrorCode.HTTP_STATUS_404.getStatus().series().name().toLowerCase())
                 .build();
-        return ResponseEntity.status(ErrorCode.DISPLAY_NOT_FOUND.getStatus()).body(errorResponse);
+        return ResponseEntity.status(ErrorCode.HTTP_STATUS_404.getStatus()).body(errorResponse);
     }
 
     @ExceptionHandler({ Exception.class })
     protected ResponseEntity<?> handleServerException(Exception ex) {
         this.logWriteExceptionStackTrace(ex);
         ErrorResponse errorResponse = ErrorResponse.builder()
-                .httpStatus(ErrorCode.INTERNAL_SERVER_ERROR.getStatus())
-                .message(ErrorCode.INTERNAL_SERVER_ERROR.getMessage())
-                .error(ErrorCode.INTERNAL_SERVER_ERROR.getStatus().series().name().toLowerCase())
+                .httpStatus(ErrorCode.HTTP_STATUS_500.getStatus())
+                .message(ErrorCode.HTTP_STATUS_500.getMessage())
+                .error(ErrorCode.HTTP_STATUS_500.getStatus().series().name().toLowerCase())
                 .build();
-        return ResponseEntity.status(ErrorCode.INTERNAL_SERVER_ERROR.getStatus()).body(errorResponse);
+        return ResponseEntity.status(ErrorCode.HTTP_STATUS_500.getStatus()).body(errorResponse);
     }
 
     private void logWriteExceptionStackTrace(Throwable e){

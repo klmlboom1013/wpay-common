@@ -22,9 +22,9 @@ public class PortOutFactory extends BasePortFactory {
 
     public PortOutFactory(List<ExternalPort> externalPorts, List<PersistencePort> persistencePorts) {
         if(CollectionUtils.isEmpty(externalPorts))
-            throw new CustomException(ErrorCode.INTERNAL_SERVER_ERROR, "ExternalPort Interface 가 구현된 Bean 을 찾지 못 했습니다.");
+            throw new CustomException(ErrorCode.HTTP_STATUS_500, "ExternalPort Interface 가 구현된 Bean 을 찾지 못 했습니다.");
         if(CollectionUtils.isEmpty(persistencePorts))
-            throw new CustomException(ErrorCode.INTERNAL_SERVER_ERROR, "PersistencePort Interface 가 구현된 Bean 을 찾지 못 했습니다.");
+            throw new CustomException(ErrorCode.HTTP_STATUS_500, "PersistencePort Interface 가 구현된 Bean 을 찾지 못 했습니다.");
 
         externalPorts.forEach(out -> {
             final String key = this.makeMapperKey(out.getVersionCode().toString(), out.getJobCode().toString(),out.getPortDvdCode().toString());
