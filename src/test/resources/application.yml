@@ -1,0 +1,6 @@
+server:
+  port: 80
+
+logging:
+  # log4j2 설정 .yml 파일 경로 설정
+  config: classpath:log4j2.yml
