@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.wpay.common'
-version = '0.0.23-SNAPSHOT'
+version = '0.0.24-SNAPSHOT'
 
 java {
 	sourceCompatibility = '11'
