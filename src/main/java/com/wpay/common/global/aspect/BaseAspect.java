@@ -9,7 +9,6 @@ import com.wpay.common.global.exception.ErrorCode;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.aspectj.lang.JoinPoint;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 import javax.servlet.http.HttpServletRequest;
@@ -72,7 +71,8 @@ public abstract class BaseAspect {
                 contentType.set(request.getHeader(key));
             }
         });
-        if(Strings.isBlank(contentType.get()) || Boolean.FALSE.equals(contentType.get().contentEquals(MediaType.APPLICATION_JSON_VALUE))){
+        log.debug(">>> http request header: contentType : {}", contentType.get());
+        if(Strings.isBlank(contentType.get()) || Boolean.FALSE.equals(contentType.get().toLowerCase().contains("application/json"))){
             throw new CustomException(ErrorCode.HTTP_STATUS_415);
         }
 
