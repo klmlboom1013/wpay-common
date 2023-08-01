@@ -14,7 +14,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         // 접근 권한 제어 예외 URI 등록
-        http.antMatcher("/*");
+        http.antMatcher("/h2-console");
         return http.build();
     }
 }
