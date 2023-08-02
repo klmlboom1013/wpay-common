@@ -4,10 +4,9 @@ import com.extrus.jce.provider.ExecureProvider;
 import lombok.extern.log4j.Log4j2;
 
 import javax.crypto.Cipher;
-import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.security.Security;
 import java.util.Base64;
 import java.util.Objects;
@@ -25,41 +24,21 @@ public abstract class BaseCryptoSEED {
         }
     }
 
-    private final SecretKey secretKey;
-    private final IvParameterSpec iv;
-    private final Cipher cipher;
-
-    protected BaseCryptoSEED(SecretKey secretKey,  IvParameterSpec iv, Cipher cipher) {
-        this.secretKey=secretKey;
-        this.iv=iv;
-        this.cipher=cipher;
+    private Cipher getCipher(int mode, String key, String iv) throws Exception {
+        final Cipher cipher = Cipher.getInstance(ALGORITHM, PROVIDER);
+        cipher.init(mode,
+                new SecretKeySpec(Base64.getDecoder().decode(key.getBytes()), "SEED"),
+                new IvParameterSpec(iv.getBytes()));
+        return cipher;
     }
 
-    public String encrypt(String plainText) throws Exception {
-        return this.encrypt(plainText, StandardCharsets.UTF_8);
-    }
-
-    public String decrypt(String cipherText) throws Exception {
-        return this.decrypt(cipherText, StandardCharsets.UTF_8);
-    }
-
-    public String encryptKR(String plainText) throws Exception {
-        return this.encrypt(plainText, Charset.forName("EUC-KR"));
-    }
-
-    public String decryptKR(String cipherText) throws Exception {
-        return this.decrypt(cipherText, Charset.forName("EUC-KR"));
-    }
-
-    public String encrypt(String plainText, Charset charset) throws Exception {
+    public String encrypt(String plainText, Charset charset, String key, String iv) throws Exception {
         log.debug("--- SEED Encrypt Start [plainText: {}][charset: {}] ---", plainText, charset.name());
-        this.cipher.init(Cipher.ENCRYPT_MODE, this.secretKey, this.iv);
-        return Base64.getEncoder().encodeToString(this.cipher.doFinal(plainText.getBytes(charset)));
+        return Base64.getEncoder().encodeToString(this.getCipher(Cipher.ENCRYPT_MODE, key, iv).doFinal(plainText.getBytes(charset)));
     }
 
-    public String decrypt(String cipherText, Charset charset) throws Exception {
+    public String decrypt(String cipherText, Charset charset, String key, String iv) throws Exception {
         log.debug("--- SEED Decrypt Start [cipherText: {}][charset: {}] ---", cipherText, charset.name());
-        this.cipher.init(Cipher.DECRYPT_MODE, this.secretKey, this.iv);
-        return new String(cipher.doFinal(Base64.getDecoder().decode(cipherText.getBytes())), charset);
+        return new String(this.getCipher(Cipher.DECRYPT_MODE, key, iv).doFinal(Base64.getDecoder().decode(cipherText.getBytes())), charset);
     }
 }

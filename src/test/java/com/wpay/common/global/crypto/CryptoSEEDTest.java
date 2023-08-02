@@ -2,44 +2,25 @@ package com.wpay.common.global.crypto;
 
 import org.junit.jupiter.api.Test;
 
-class CryptoSEEDforDBTest {
+class CryptoSEEDTest {
     @Test
     public void test() throws Exception {
         System.out.println("======================");
-        String enc1 = CryptoSEEDforDB.getInstance().encrypt("01020161017");
-        System.out.println(CryptoSEEDforDB.getInstance().decrypt(enc1));
+        String enc1 = CryptoSEED.getInstance().dbEncrypt("01020161017");
+        System.out.println(CryptoSEED.getInstance().dbDecrypt(enc1));
         System.out.println("======================");
-        String enc2 = CryptoSEEDforDB.getInstance().encrypt("19841013");
-        System.out.println(CryptoSEEDforDB.getInstance().decrypt(enc2));
+        String enc2 = CryptoSEED.getInstance().dbEncrypt("19841013");
+        System.out.println(CryptoSEED.getInstance().dbDecrypt(enc2));
         System.out.println("======================");
-        String enc3 = CryptoSEEDforDB.getInstance().encrypt("1");
-        System.out.println(CryptoSEEDforDB.getInstance().decrypt(enc3));
+        String enc3 = CryptoSEED.getInstance().dbEncrypt("1");
+        System.out.println(CryptoSEED.getInstance().dbDecrypt(enc3));
         System.out.println("======================");
-        String enc4 = CryptoSEEDforDB.getInstance().encryptKR("이현승");
-        System.out.println(CryptoSEEDforDB.getInstance().decryptKR(enc4));
+        String enc4 = CryptoSEED.getInstance().dbEncryptKR("이현승");
+        System.out.println(CryptoSEED.getInstance().dbDecryptKR(enc4));
         System.out.println("======================");
-        String enc5 = CryptoSEEDforDB.getInstance().encrypt("1345");
-        System.out.println(CryptoSEEDforDB.getInstance().decrypt(enc5));
+        String enc5 = CryptoSEED.getInstance().dbEncrypt("1345");
+        System.out.println(CryptoSEED.getInstance().dbDecrypt(enc5));
         System.out.println("======================");
     }
 
-    @Test
-    public void test2() throws Exception {
-        System.out.println("======================");
-        String enc1 = CryptoSEED.getInstance().encrypt("01020161017");
-        System.out.println(CryptoSEED.getInstance().decrypt(enc1));
-        System.out.println("======================");
-        String enc2 = CryptoSEED.getInstance().encrypt("19841013");
-        System.out.println(CryptoSEED.getInstance().decrypt(enc2));
-        System.out.println("======================");
-        String enc3 = CryptoSEED.getInstance().encrypt("1");
-        System.out.println(CryptoSEED.getInstance().decrypt(enc3));
-        System.out.println("======================");
-        String enc4 = CryptoSEED.getInstance().encryptKR("이현승");
-        System.out.println(CryptoSEED.getInstance().decryptKR(enc4));
-        System.out.println("======================");
-        String enc5 = CryptoSEED.getInstance().encrypt("1345");
-        System.out.println(CryptoSEED.getInstance().decrypt(enc5));
-        System.out.println("======================");
-    }
 }

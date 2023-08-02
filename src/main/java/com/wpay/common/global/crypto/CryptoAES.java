@@ -3,31 +3,41 @@ package com.wpay.common.global.crypto;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 
-import javax.crypto.Cipher;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 @Log4j2
 public final class CryptoAES extends BaseCryptoAES {
 
     @Getter
-    private static final CryptoAES instance;
+    private static final CryptoAES instance = new CryptoAES();
 
-    static {
-        try {
-            instance = new CryptoAES();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    private static final String API_ENC_KEY = "12345678901234567890123456789012";
+    private static final String API_ENC_IV = "wpaycoremodule00";
+
+    private CryptoAES() { }
+
+    public String encrypt(String plainText) throws Exception {
+        return super.encrypt(plainText, StandardCharsets.UTF_8, API_ENC_KEY, API_ENC_IV);
     }
 
-    private static final String KEY = "12345678901234567890123456789012";
-    private static final String IV = "wpaycoremodule00";
+    public String decrypt(String plainText) throws Exception {
+        return super.decrypt(plainText, StandardCharsets.UTF_8, API_ENC_KEY, API_ENC_IV);
+    }
 
-    private CryptoAES() throws Exception {
-        super(new SecretKeySpec(KEY.getBytes(StandardCharsets.UTF_8), "AES"),
-                new IvParameterSpec(IV.getBytes(StandardCharsets.UTF_8)),
-                Cipher.getInstance(ALGORITHM));
+    public String encrypt(String plainText, Charset charset) throws Exception {
+        return super.encrypt(plainText, charset, API_ENC_KEY, API_ENC_IV);
+    }
+
+    public String decrypt(String plainText, Charset charset) throws Exception {
+        return super.decrypt(plainText, charset, API_ENC_KEY, API_ENC_IV);
+    }
+
+    public String encryptKR(String plainText) throws Exception {
+        return super.encrypt(plainText, Charset.forName("EUC-KR"), API_ENC_KEY, API_ENC_IV);
+    }
+
+    public String decryptKR(String plainText) throws Exception {
+        return super.decrypt(plainText, Charset.forName("EUC-KR"), API_ENC_KEY, API_ENC_IV);
     }
 }
