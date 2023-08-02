@@ -1,7 +1,7 @@
 package com.wpay.common.global.dto;
 
 import com.wpay.common.global.annotation.Crypto;
-import com.wpay.common.global.crypto.CryptoAES256;
+import com.wpay.common.global.crypto.CryptoAES;
 import lombok.extern.log4j.Log4j2;
 
 import java.lang.reflect.Field;
@@ -27,9 +27,9 @@ public abstract class SelfCrypto {
             if (Crypto.Algorithm.AES256.equals(crypto.algorithm())){
                 try {
                     field.set(this, (Crypto.Type.ENCRYPTION.equals(crypto.type()))
-                            ? CryptoAES256.getInstance().encrypt(value, crypto.encodings().getCharset())
-                            : CryptoAES256.getInstance().decrypt(value, crypto.encodings().getCharset()));
-                } catch (IllegalAccessException e) {
+                            ? CryptoAES.getInstance().encrypt(value, crypto.encodings().getCharset())
+                            : CryptoAES.getInstance().decrypt(value, crypto.encodings().getCharset()));
+                } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
             } else {
