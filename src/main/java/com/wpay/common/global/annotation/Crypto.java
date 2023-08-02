@@ -22,15 +22,21 @@ public @interface Crypto {
 
     Algorithm algorithm();
 
+    CryptoKey cryptoKey();
+
     enum Algorithm {
-        AES256, SEED
+        AES, SEED
+    }
+
+    enum CryptoKey {
+        API, DB, MERCHANT, RANDOM, OTHER
     }
     
     @AllArgsConstructor
     enum Encodings {
         UTF_8(StandardCharsets.UTF_8),
         ISO_8859_1(StandardCharsets.ISO_8859_1),
-        EUC_KR(StandardCharsets.ISO_8859_1);
+        EUC_KR(Charset.forName("EUC-KR"));
 
         @Getter private final Charset charset;
     }

@@ -17,27 +17,27 @@ public final class CryptoAES extends BaseCryptoAES {
 
     private CryptoAES() { }
 
-    public String encrypt(String plainText) throws Exception {
+    public String apiEncrypt(String plainText) throws Exception {
         return super.encrypt(plainText, StandardCharsets.UTF_8, API_ENC_KEY, API_ENC_IV);
     }
 
-    public String decrypt(String plainText) throws Exception {
+    public String apiDecrypt(String plainText) throws Exception {
         return super.decrypt(plainText, StandardCharsets.UTF_8, API_ENC_KEY, API_ENC_IV);
     }
 
-    public String encrypt(String plainText, Charset charset) throws Exception {
+    public String apiEncrypt(String plainText, Charset charset) throws Exception {
         return super.encrypt(plainText, charset, API_ENC_KEY, API_ENC_IV);
     }
 
-    public String decrypt(String plainText, Charset charset) throws Exception {
+    public String apiDecrypt(String plainText, Charset charset) throws Exception {
         return super.decrypt(plainText, charset, API_ENC_KEY, API_ENC_IV);
     }
 
-    public String encryptKR(String plainText) throws Exception {
+    public String apiEncryptKR(String plainText) throws Exception {
         return super.encrypt(plainText, Charset.forName("EUC-KR"), API_ENC_KEY, API_ENC_IV);
     }
 
-    public String decryptKR(String plainText) throws Exception {
+    public String apiDecryptKR(String plainText) throws Exception {
         return super.decrypt(plainText, Charset.forName("EUC-KR"), API_ENC_KEY, API_ENC_IV);
     }
 }
