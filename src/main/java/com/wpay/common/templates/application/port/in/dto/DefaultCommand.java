@@ -1,8 +1,8 @@
-package com.wpay.common.templates.application.port.in.usecase;
+package com.wpay.common.templates.application.port.in.dto;
 
 import com.wpay.common.global.dto.BaseCommand;
 import com.wpay.common.global.enums.JobCodes;
-import com.wpay.common.templates.global.enums.DefaultVersion;
+import com.wpay.common.templates.application.port.in.usecase.DefaultUseCaseVersion;
 import lombok.*;
 
 /**
@@ -20,7 +20,7 @@ public class DefaultCommand extends BaseCommand<DefaultCommand> {
 
     @Override
     public void checkVersion(String version) {
-        DefaultVersion.getInstance(version);
+        DefaultUseCaseVersion.getInstance(version);
     }
 
     @Override

@@ -5,11 +5,11 @@ import com.wpay.common.global.dto.BaseResponse;
 import com.wpay.common.global.enums.JobCodes;
 import com.wpay.common.global.port.PortOutFactory;
 import com.wpay.common.templates.application.port.in.usecase.DefaultUseCasePort;
-import com.wpay.common.templates.application.port.out.DefaultExternalMapper;
+import com.wpay.common.templates.application.port.in.usecase.DefaultUseCaseVersion;
+import com.wpay.common.templates.application.port.out.dto.DefaultExternalMapper;
 import com.wpay.common.templates.application.port.out.external.DefaultExternalPort;
 import com.wpay.common.templates.application.port.out.persistence.DefaultPersistencePort;
-import com.wpay.common.templates.domain.ActivityDefault;
-import com.wpay.common.templates.global.enums.DefaultVersion;
+import com.wpay.common.templates.domain.Activity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -28,12 +28,12 @@ public class DefaultService implements DefaultUseCasePort {
     }
 
     @Override
-    public DefaultVersion getVersionCode() {
-        return DefaultVersion.v1;
+    public DefaultUseCaseVersion getVersionCode() {
+        return DefaultUseCaseVersion.v1;
     }
 
     @Override
-    public BaseResponse defaultRun(ActivityDefault activity) {
+    public BaseResponse defaultRun(Activity activity) {
 
         // TODO: business 로직 구현
         final DefaultExternalPort defaultExternalPort = this.getExternalPort();

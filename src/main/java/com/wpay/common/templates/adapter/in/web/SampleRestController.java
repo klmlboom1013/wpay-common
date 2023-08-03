@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class SampleRestController {
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping(path = "/crypto/aes/enc")
+    @PostMapping(path = "/templates/crypto/aes/enc")
     public ResponseEntity<?> encryptionSampleRun(@RequestBody CryptEncryptDto dto) {
         log.info(">> DTO : {} ", dto.toString());
         dto.resetFieldDataCrypto();
@@ -21,7 +21,7 @@ public class SampleRestController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(path = "/crypto/aes/dec")
+    @GetMapping(path = "/templates/crypto/aes/dec")
     public ResponseEntity<?> decryptionSampleRun(@RequestBody CryptDecryptDto dto) {
         log.info(">> DTO : {} ", dto.toString());
         dto.resetFieldDataCrypto();
@@ -33,7 +33,7 @@ public class SampleRestController {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class CryptEncryptDto extends SelfCrypto {
-        @Crypto(type = Crypto.Type.ENCRYPTION, algorithm = Crypto.Algorithm.AES256) // 암호화
+        @Crypto(type = Crypto.Type.ENCRYPTION, algorithm = Crypto.Algorithm.AES, cryptoKey = Crypto.CryptoKey.API) // 암호화
         @Getter
         private String data;
     }
@@ -43,7 +43,7 @@ public class SampleRestController {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class CryptDecryptDto extends SelfCrypto {
-        @Crypto(type = Crypto.Type.DECRYPTION, algorithm = Crypto.Algorithm.AES256) // 복호화
+        @Crypto(type = Crypto.Type.DECRYPTION, algorithm = Crypto.Algorithm.AES, cryptoKey = Crypto.CryptoKey.API) // 복호화
         @Getter
         private String data;
     }

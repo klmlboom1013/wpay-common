@@ -4,14 +4,14 @@ import com.wpay.common.global.dto.BaseCommand;
 import com.wpay.common.global.dto.BaseResponse;
 import com.wpay.common.global.dto.SelfValidating;
 import com.wpay.common.global.port.in.UseCasePort;
-import com.wpay.common.templates.domain.ActivityDefault;
+import com.wpay.common.templates.domain.Activity;
 
 public interface DefaultUseCasePort extends UseCasePort {
 
     @Override
     default BaseResponse execute(SelfValidating<?> selfValidating){
         final BaseCommand<?> baseCommand = (BaseCommand<?>) selfValidating;
-        ActivityDefault activity = ActivityDefault.builder()
+        Activity activity = Activity.builder()
                 .jobCodes(baseCommand.getJobCodes())
                 .wtid(baseCommand.getWtid())
                 .mid(baseCommand.getMid())
@@ -23,5 +23,5 @@ public interface DefaultUseCasePort extends UseCasePort {
         return this.defaultRun(activity);
     }
 
-    BaseResponse defaultRun(ActivityDefault activity);
+    BaseResponse defaultRun(Activity activity);
 }

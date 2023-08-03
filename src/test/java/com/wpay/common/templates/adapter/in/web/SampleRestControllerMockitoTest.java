@@ -36,7 +36,7 @@ class SampleRestControllerMockitoTest {
 
     @Test
     void decryptionSampleRun() {
-        final String encStr = "d3BheWNvcmVtb2R1bGUwMN9SJ9Q3Ma62hvJgR3Wuwu+Bjvkb/g8onMJ9MIyTkO7ba6VKESRr0/rzHOlyjtsvC1v6kFHeiFJ3kM29tVytTX+nKpulAaIUO5qJlkUCapU5/T9xRNuLPkGm5YunVS7p1zU6I7epk1HKI9VQq3tRe8JfIDlSloD0u0zppPkQtuEPOzZe+2PdVwzkF+I2x3UAkg==";
+        final String encStr = "WXgfmVsVgsE1BKxVIFdMKg==";
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
         SampleRestController.CryptDecryptDto cryptDecryptDto = new SampleRestController.CryptDecryptDto(encStr);

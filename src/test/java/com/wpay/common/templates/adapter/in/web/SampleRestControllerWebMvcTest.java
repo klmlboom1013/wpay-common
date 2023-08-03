@@ -31,7 +31,7 @@ class SampleRestControllerWebMvcTest {
     void encryptionSampleRun() throws Exception {
         String plainText = "klmlboom";
         ResultActions resultActions = mvc.perform( MockMvcRequestBuilders
-                        .post("/crypto/aes/enc")
+                        .post("/templates/crypto/aes/enc")
                         .header("content-type", "application/json")
                         .with(csrf())
                         .content(asJsonString(new SampleRestController.CryptEncryptDto(plainText)))
@@ -47,7 +47,7 @@ class SampleRestControllerWebMvcTest {
     void decryptionSampleRun() throws Exception {
         String encStr = "WXgfmVsVgsE1BKxVIFdMKg==";
         ResultActions resultActions = mvc.perform( MockMvcRequestBuilders
-                        .get("/crypto/aes/dec")
+                        .get("/templates/crypto/aes/dec")
                         .with(csrf())
                         .content(asJsonString(new SampleRestController.CryptEncryptDto(encStr)))
                         .contentType(MediaType.APPLICATION_JSON)

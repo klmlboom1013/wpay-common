@@ -1,4 +1,4 @@
-package com.wpay.common.templates.application.port.out;
+package com.wpay.common.templates.application.port.out.dto;
 
 import lombok.*;
 import lombok.extern.log4j.Log4j2;

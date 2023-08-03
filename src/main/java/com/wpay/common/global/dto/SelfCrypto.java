@@ -47,7 +47,7 @@ public abstract class SelfCrypto {
                 }
             }
             else {
-                throw new RuntimeException("필드 암호화 설정이 적용된 정책이 유효 하지 않습니다. 다시 확인 바랍니다.");
+                throw new RuntimeException("필드 암호화 설정이 적용된 정책이 유효 하지않 습니다. 다시 확인 바랍니다.");
             }
         }
     }
@@ -69,7 +69,7 @@ public abstract class SelfCrypto {
                     Crypto.CryptoKey.MERCHANT.equals(crypto.cryptoKey())
                             || Crypto.CryptoKey.RANDOM.equals(crypto.cryptoKey())
                             || Crypto.CryptoKey.OTHER.equals(crypto.cryptoKey()))) {
-                throw new RuntimeException("필드 암호화 키 설정 정책이 유효 하지 않습니다. 다시 확인 바랍니다.");
+                throw new RuntimeException("필드 암호화 키 설정 정책이 유효 하지않 습니다. 다시 확인 바랍니다.");
             }
 
             String result;
@@ -94,8 +94,8 @@ public abstract class SelfCrypto {
                 }
             }
             else {
-                throw new RuntimeException("필드 암호화 설정이 적용된 정책이 유효 하지 않습니다. 다시 확인 바랍니다.");
+                throw new RuntimeException("필드 암호화 설정이 적용된 정책이 유효 하지않 습니다. 다시 확인 바랍니다.");
             }
-        }
+         }
     }
 }

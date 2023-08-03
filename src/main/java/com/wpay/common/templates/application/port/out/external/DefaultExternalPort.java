@@ -2,8 +2,8 @@ package com.wpay.common.templates.application.port.out.external;
 
 import com.wpay.common.global.enums.JobCodes;
 import com.wpay.common.global.port.out.ExternalPort;
-import com.wpay.common.templates.application.port.out.DefaultExternalMapper;
-import com.wpay.common.templates.domain.ActivityDefault;
+import com.wpay.common.templates.application.port.out.dto.DefaultExternalMapper;
+import com.wpay.common.templates.domain.Activity;
 
 public interface DefaultExternalPort extends ExternalPort {
     @Override default JobCodes getJobCode() {
@@ -11,5 +11,5 @@ public interface DefaultExternalPort extends ExternalPort {
         return JobCodes.JOB_CODE_ZZ;
     }
 
-    DefaultExternalMapper defaultRun(ActivityDefault activity);
+    DefaultExternalMapper defaultRun(Activity activity);
 }
