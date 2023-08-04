@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.function.Function;
 
-public final class PrivacyFunction {
-    private PrivacyFunction() { }
+public final class PrivacyFunctions {
+    private PrivacyFunctions() { }
 
     /**
      * <pre>

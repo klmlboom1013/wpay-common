@@ -10,8 +10,6 @@ public class Functions {
 
     private Functions(){ }
 
-    public static Function<Date, String> getTimestampMilliSecond =
-            (date) -> (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")).format(date);
 
     public static Function<Date, Long> makeSrlno = (date) -> {
         Random random = new Random();

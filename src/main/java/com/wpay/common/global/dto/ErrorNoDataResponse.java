@@ -1,6 +1,6 @@
 package com.wpay.common.global.dto;
 
-import com.wpay.common.global.common.Functions;
+import com.wpay.common.global.common.DateFunctions;
 import lombok.*;
 import org.springframework.http.HttpStatus;
 
@@ -11,7 +11,7 @@ import java.util.Date;
 @ToString
 @EqualsAndHashCode
 public class ErrorNoDataResponse {
-    String timestamp = Functions.getTimestampMilliSecond.apply(new Date());
+    String timestamp = DateFunctions.getTimestampMilliSecond.apply(new Date());
     Integer status;
     String error;
     String message;
