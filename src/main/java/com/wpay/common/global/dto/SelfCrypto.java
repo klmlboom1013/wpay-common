@@ -1,8 +1,8 @@
 package com.wpay.common.global.dto;
 
 import com.wpay.common.global.annotation.Crypto;
-import com.wpay.common.global.crypto.CryptoAES;
-import com.wpay.common.global.crypto.CryptoSEED;
+import com.wpay.common.global.cryption.CryptoAES;
+import com.wpay.common.global.cryption.CryptoSEED;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
 

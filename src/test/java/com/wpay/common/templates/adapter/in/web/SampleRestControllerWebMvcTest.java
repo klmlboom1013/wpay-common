@@ -1,7 +1,7 @@
 package com.wpay.common.templates.adapter.in.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wpay.common.global.config.SecurityConfig;
+import com.wpay.common.global.security.SecurityConfig;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

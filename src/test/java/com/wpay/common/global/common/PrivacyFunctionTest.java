@@ -1,5 +1,6 @@
 package com.wpay.common.global.common;
 
+import com.wpay.common.global.functions.PrivacyFunctions;
 import org.junit.jupiter.api.Test;
 
 class PrivacyFunctionTest {

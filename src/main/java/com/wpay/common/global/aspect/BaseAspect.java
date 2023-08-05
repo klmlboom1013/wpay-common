@@ -1,6 +1,6 @@
 package com.wpay.common.global.aspect;
 
-import com.wpay.common.global.common.Functions;
+import com.wpay.common.global.functions.DataFunctions;
 import com.wpay.common.global.dto.BaseCommand;
 import com.wpay.common.global.dto.SelfCrypto;
 import com.wpay.common.global.dto.SelfValidating;
@@ -87,7 +87,7 @@ public abstract class BaseAspect {
             /* API Call Version 확인 */
             baseCommand.checkVersion(request.getRequestURI().split("/")[2]);
             /* set serverName */
-            baseCommand.setServerName(Functions.getIdcDvdCd.apply(request.getServerName()));
+            baseCommand.setServerName(DataFunctions.getIdcDvdCd.apply(request.getServerName()));
             /* validation check */
             baseCommand.validateCryptoSelf();
             log.info("Validation check success!! \n[{}]", o.toString());

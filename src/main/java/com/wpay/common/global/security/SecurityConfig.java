@@ -1,4 +1,4 @@
-package com.wpay.common.global.config;
+package com.wpay.common.global.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

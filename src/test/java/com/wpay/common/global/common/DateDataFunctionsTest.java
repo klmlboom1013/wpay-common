@@ -1,10 +1,11 @@
 package com.wpay.common.global.common;
 
+import com.wpay.common.global.functions.DateFunctions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
-class DateFunctionsTest {
+class DateDataFunctionsTest {
 
     @Test
     public void tests() {

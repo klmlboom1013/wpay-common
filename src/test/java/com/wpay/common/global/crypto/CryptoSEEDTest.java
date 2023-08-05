@@ -1,5 +1,6 @@
 package com.wpay.common.global.crypto;
 
+import com.wpay.common.global.cryption.CryptoSEED;
 import org.junit.jupiter.api.Test;
 
 class CryptoSEEDTest {

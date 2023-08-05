@@ -1,4 +1,4 @@
-package com.wpay.common.global.crypto;
+package com.wpay.common.global.cryption;
 
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;

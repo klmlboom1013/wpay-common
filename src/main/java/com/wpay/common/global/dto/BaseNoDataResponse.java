@@ -1,7 +1,7 @@
 package com.wpay.common.global.dto;
 
 
-import com.wpay.common.global.common.DateFunctions;
+import com.wpay.common.global.functions.DateFunctions;
 import lombok.*;
 import org.springframework.http.HttpStatus;
 

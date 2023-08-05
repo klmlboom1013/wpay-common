@@ -1,4 +1,4 @@
-package com.wpay.common.global.crypto;
+package com.wpay.common.global.cryption;
 
 import com.extrus.jce.provider.ExecureProvider;
 import lombok.extern.log4j.Log4j2;

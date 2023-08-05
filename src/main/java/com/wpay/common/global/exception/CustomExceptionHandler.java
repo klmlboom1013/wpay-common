@@ -2,6 +2,10 @@ package com.wpay.common.global.exception;
 
 import com.wpay.common.global.dto.ErrorNoDataResponse;
 import com.wpay.common.global.dto.ErrorResponse;
+import io.netty.handler.proxy.ProxyConnectException;
+import io.netty.handler.ssl.SslHandshakeTimeoutException;
+import io.netty.handler.timeout.ReadTimeoutException;
+import io.netty.handler.timeout.WriteTimeoutException;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.ResponseEntity;
@@ -77,6 +81,50 @@ public class CustomExceptionHandler {
                 .error(ErrorCode.HTTP_STATUS_404.getStatus().series().name().toLowerCase())
                 .build();
         return ResponseEntity.status(ErrorCode.HTTP_STATUS_404.getStatus()).body(errorNoDataResponse);
+    }
+
+    @ExceptionHandler({ReadTimeoutException.class})
+    protected ResponseEntity<?> handleReadTimeoutException(ReadTimeoutException ex) {
+        this.logWriteExceptionStackTrace(ex);
+        ErrorNoDataResponse errorNoDataResponse = ErrorNoDataResponse.builder()
+                .httpStatus(ErrorCode.HTTP_STATUS_504.getStatus())
+                .message(ErrorCode.HTTP_STATUS_504.getMessage())
+                .error(ErrorCode.HTTP_STATUS_504.getStatus().series().name().toLowerCase())
+                .build();
+        return ResponseEntity.status(ErrorCode.HTTP_STATUS_504.getStatus()).body(errorNoDataResponse);
+    }
+
+    @ExceptionHandler({SslHandshakeTimeoutException.class})
+    protected ResponseEntity<?> handleSslHandshakeTimeoutException(SslHandshakeTimeoutException ex) {
+        this.logWriteExceptionStackTrace(ex);
+        ErrorNoDataResponse errorNoDataResponse = ErrorNoDataResponse.builder()
+                .httpStatus(ErrorCode.HTTP_STATUS_504.getStatus())
+                .message(ErrorCode.HTTP_STATUS_504.getMessage())
+                .error(ErrorCode.HTTP_STATUS_504.getStatus().series().name().toLowerCase())
+                .build();
+        return ResponseEntity.status(ErrorCode.HTTP_STATUS_504.getStatus()).body(errorNoDataResponse);
+    }
+
+    @ExceptionHandler({ProxyConnectException.class})
+    protected ResponseEntity<?> handleProxyConnectException(ProxyConnectException ex) {
+        this.logWriteExceptionStackTrace(ex);
+        ErrorNoDataResponse errorNoDataResponse = ErrorNoDataResponse.builder()
+                .httpStatus(ErrorCode.HTTP_STATUS_504.getStatus())
+                .message(ErrorCode.HTTP_STATUS_504.getMessage())
+                .error(ErrorCode.HTTP_STATUS_504.getStatus().series().name().toLowerCase())
+                .build();
+        return ResponseEntity.status(ErrorCode.HTTP_STATUS_504.getStatus()).body(errorNoDataResponse);
+    }
+
+    @ExceptionHandler({WriteTimeoutException.class})
+    protected ResponseEntity<?> handleWriteTimeoutException(WriteTimeoutException ex) {
+        this.logWriteExceptionStackTrace(ex);
+        ErrorNoDataResponse errorNoDataResponse = ErrorNoDataResponse.builder()
+                .httpStatus(ErrorCode.HTTP_STATUS_504.getStatus())
+                .message(ErrorCode.HTTP_STATUS_504.getMessage())
+                .error(ErrorCode.HTTP_STATUS_504.getStatus().series().name().toLowerCase())
+                .build();
+        return ResponseEntity.status(ErrorCode.HTTP_STATUS_504.getStatus()).body(errorNoDataResponse);
     }
 
     @ExceptionHandler({ Exception.class })

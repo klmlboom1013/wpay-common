@@ -1,4 +1,4 @@
-package com.wpay.common.global.common;
+package com.wpay.common.global.functions;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

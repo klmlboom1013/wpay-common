@@ -1,4 +1,4 @@
-package com.wpay.common.global.common;
+package com.wpay.common.global.functions;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -6,9 +6,9 @@ import java.util.Random;
 import java.util.function.Function;
 
 
-public class Functions {
+public class DataFunctions {
 
-    private Functions(){ }
+    private DataFunctions(){ }
 
 
     public static Function<Date, Long> makeSrlno = (date) -> {
