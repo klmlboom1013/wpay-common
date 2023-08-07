@@ -1,6 +1,6 @@
 package com.wpay.common.global.infra.sample;
 
-import com.wpay.common.global.exception.BadWebClientRequestException;
+import com.wpay.common.global.exception.*;
 import com.wpay.common.global.infra.WebClientConfigure;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -26,25 +26,28 @@ public class RequestRetrieveTest {
                 .uri(uri)
                 .bodyValue(body)
                 .retrieve()
-                .onStatus(HttpStatus::is4xxClientError, response ->
-                        Mono.error(
-                                new BadWebClientRequestException(
-                                        response.rawStatusCode(),
-                                        String.format("4xx 외부 요청 오류. statusCode: %s, response: %s, header: %s",
-                                                response.rawStatusCode(),
-                                                response.bodyToMono(String.class),
-                                                response.headers().asHttpHeaders())
-                                )
-                        )
-                )
-                .onStatus(HttpStatus::is5xxServerError, response ->
-                        Mono.error(
-                                new WebClientResponseException(
-                                        response.rawStatusCode(),
-                                        String.format("5xx 외부 시스템 오류. %s", response.bodyToMono(String.class)),
-                                        response.headers().asHttpHeaders(), null, null
-                                )
-                        )
-                ).toEntity(ResResult.class);
+                .onStatus(HttpStatus::is4xxClientError,
+                        response -> Mono.error(new BadWebClientRequestException(
+                                BadWebClientRequestExceptionData.builder()
+                                        .customExceptionData(CustomExceptionData.builder().errorCode(ErrorCode.HTTP_STATUS_501).build())
+                                        .responseHttpStatus(response.statusCode())
+                                        .responseStatusText(
+                                                String.format("4xx 외부 요청 오류. statusCode: %s, response: %s, header: %s",
+                                                        response.rawStatusCode(),
+                                                        response.bodyToMono(String.class),
+                                                        response.headers().asHttpHeaders()))
+                                        .build())))
+                .onStatus(HttpStatus::is5xxServerError,
+                        response -> Mono.error(new BadWebClientRequestException(
+                                BadWebClientRequestExceptionData.builder()
+                                        .customExceptionData(CustomExceptionData.builder().errorCode(ErrorCode.HTTP_STATUS_503).build())
+                                        .responseHttpStatus(response.statusCode())
+                                        .responseStatusText(
+                                                String.format("5xx 외부 응답 오류. statusCode: %s, response: %s, header: %s",
+                                                        response.rawStatusCode(),
+                                                        response.bodyToMono(String.class),
+                                                        response.headers().asHttpHeaders())
+                                        ).build())))
+                .toEntity(ResResult.class);
     }
 }

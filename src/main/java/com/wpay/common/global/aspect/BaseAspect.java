@@ -1,5 +1,6 @@
 package com.wpay.common.global.aspect;
 
+import com.wpay.common.global.exception.CustomExceptionData;
 import com.wpay.common.global.functions.DataFunctions;
 import com.wpay.common.global.dto.BaseCommand;
 import com.wpay.common.global.dto.SelfCrypto;
@@ -73,7 +74,8 @@ public abstract class BaseAspect {
         });
         log.debug(">>> http request header: contentType : {}", contentType.get());
         if(Strings.isBlank(contentType.get()) || Boolean.FALSE.equals(contentType.get().toLowerCase().contains("application/json"))){
-            throw new CustomException(ErrorCode.HTTP_STATUS_415);
+            throw new CustomException(
+                    CustomExceptionData.builder().errorCode(ErrorCode.HTTP_STATUS_415).build());
         }
 
         log.debug("CommandDTO Validation 검증 및 데이터 암복호화를 시작 합니다.");
@@ -123,7 +125,12 @@ public abstract class BaseAspect {
                 } catch (IllegalAccessException | InvocationTargetException e) {
                     isPlay.set(false);
                     log.error("{} - {}", e.getClass().getSimpleName(), e.getMessage());
-                    throw new CustomException(ErrorCode.HTTP_STATUS_500, "ResponseEntity.body 에 path 세팅 중 오류가 발생 했습니다.", e);
+                    throw new CustomException(
+                            CustomExceptionData.builder()
+                                    .errorCode(ErrorCode.HTTP_STATUS_500)
+                                    .message("ResponseEntity.body 에 path 세팅 중 오류가 발생 했습니다.")
+                                    .e(e)
+                                    .build());
                 }
             }
         });

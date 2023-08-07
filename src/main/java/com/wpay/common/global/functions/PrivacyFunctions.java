@@ -1,12 +1,11 @@
 package com.wpay.common.global.functions;
 
 import com.wpay.common.global.exception.CustomException;
+import com.wpay.common.global.exception.CustomExceptionData;
 import com.wpay.common.global.exception.ErrorCode;
-import org.apache.logging.log4j.util.Strings;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.function.Function;
 
 public final class PrivacyFunctions {
@@ -24,7 +23,8 @@ public final class PrivacyFunctions {
         if(arr01.contains(arg)) { return "18"; }
         if(arr02.contains(arg)) { return "19"; }
         if(arr03.contains(arg)) { return "20"; }
-        throw new CustomException(ErrorCode.HTTP_STATUS_400, "주민등록번호 7번째 자리와 매칭 되는 출생년도 앞 2자리를 찾지 못 했습니다.");
+        throw new CustomException(CustomExceptionData.builder()
+                .errorCode(ErrorCode.HTTP_STATUS_400).message("주민등록번호 7번째 자리와 매칭 되는 출생년도 앞 2자리를 찾지 못 했습니다.").build());
     };
 
     /**
@@ -46,7 +46,8 @@ public final class PrivacyFunctions {
         final List<String> outers = Arrays.asList("5","6","7","8");
         if(inners.contains(arg)) { return "N"; }
         if(outers.contains(arg)) { return "Y"; }
-        throw new CustomException(ErrorCode.HTTP_STATUS_400, "주민등록번호 7번째 자리로 내외국인 구분을 하지 못 했습니다.");
+        throw new CustomException(CustomExceptionData.builder()
+                .errorCode(ErrorCode.HTTP_STATUS_400).message("주민등록번호 7번째 자리로 내외국인 구분을 하지 못 했습니다.").build());
     };
 
     /**
@@ -70,6 +71,8 @@ public final class PrivacyFunctions {
             return "19".equals(birth) ? "2" : ("20".equals(birth) ? "4" : "");
         if ("F".equals(gender) && "Y".equals(foreigner))
             return "19".equals(birth) ? "6" : ("20".equals(birth) ? "8" : "");
-        throw new CustomException(ErrorCode.HTTP_STATUS_400, "성별 코드, 내외국인 여부, 생년월일 정보로 주민등록번호 7번째 자리 검증에 실패 하였습니다.");
+        throw new CustomException(CustomExceptionData.builder()
+                .errorCode(ErrorCode.HTTP_STATUS_400).message("성별 코드, 내외국인 여부, 생년월일 정보로 주민등록번호 7번째 자리 검증에 실패 하였습니다.").build());
+
     };
 }

@@ -3,25 +3,17 @@ package com.wpay.common.global.exception;
 import lombok.Getter;
 
 @Getter
-public class BadWebClientRequestException extends RuntimeException {
+public class BadWebClientRequestException extends CustomException {
 
-    private final int statusCode;
+    private final int responseHttpStatus;
+    private final String responseStatusText;
+    private final String connUrl;
 
-    private String statusText;
 
-    public BadWebClientRequestException(int statusCode) {
-        super();
-        this.statusCode = statusCode;
-    }
-
-    public BadWebClientRequestException(int statusCode, String msg) {
-        super(msg);
-        this.statusCode = statusCode;
-    }
-
-    public BadWebClientRequestException(int statusCode, String msg, String statusText) {
-        super(msg);
-        this.statusCode = statusCode;
-        this.statusText = statusText;
+    public BadWebClientRequestException(BadWebClientRequestExceptionData badWebClientRequestExceptionData) {
+        super(badWebClientRequestExceptionData.getCustomExceptionData());
+        this.responseHttpStatus = badWebClientRequestExceptionData.getResponseHttpStatus().value();
+        this.responseStatusText = badWebClientRequestExceptionData.getResponseStatusText();
+        this.connUrl = badWebClientRequestExceptionData.getConnUrl();
     }
 }
