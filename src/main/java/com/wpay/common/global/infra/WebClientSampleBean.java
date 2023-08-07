@@ -1,9 +1,7 @@
-package com.wpay.common.global.infra.sample;
+package com.wpay.common.global.infra;
 
-import com.wpay.common.global.infra.WebClientConfigure;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 public class WebClientSampleBean {
