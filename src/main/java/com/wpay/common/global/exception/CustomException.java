@@ -1,7 +1,11 @@
 package com.wpay.common.global.exception;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.util.Strings;
+
+import java.util.Objects;
 
 @Log4j2
 @Setter
@@ -31,5 +35,12 @@ public class CustomException extends RuntimeException {
         this.wtid = customExceptionData.getWtid();
         this.mid = customExceptionData.getMid();
         this.data=customExceptionData.getData();
+    }
+
+    public String getDbRecodeMessage() {
+        if (Objects.nonNull(this.e)) { return String.format("%s: %s", this.e.getClass().getSimpleName(), this.e.getMessage()); }
+        else if (Strings.isNotBlank(this.message)) { return this.message; }
+        else if (Objects.nonNull(this.errorCode)) { this.errorCode.getMessage(); }
+        return ErrorCode.HTTP_STATUS_500.getMessage();
     }
 }
