@@ -1,6 +1,7 @@
-package com.wpay.common.global.exception;
+package com.wpay.common.global.exception.webclient;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.reactive.function.client.ClientResponse;
@@ -14,8 +15,9 @@ public class CustomWebClientResponseException extends WebClientResponseException
 
     private final ClientResponse response;
     private final URI uri;
-    private final Object mapper;
     private final String message;
+    @Setter
+    private Object mapper;
 
     public CustomWebClientResponseException(ClientResponse response, HttpMethod method, URI uri, Object mapper) {
         super(response.statusCode().value(),
