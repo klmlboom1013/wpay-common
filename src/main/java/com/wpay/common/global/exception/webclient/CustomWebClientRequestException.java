@@ -9,11 +9,11 @@ import org.springframework.web.reactive.function.client.WebClientRequestExceptio
 
 import java.net.URI;
 
+@Setter
 @Getter
 public class CustomWebClientRequestException extends WebClientRequestException {
 
-    private final ClientResponse response;
-    @Setter
+    private ClientResponse response;
     private Object mapper;
 
     public CustomWebClientRequestException(ClientResponse response, HttpMethod method, URI uri, Object mapper) {

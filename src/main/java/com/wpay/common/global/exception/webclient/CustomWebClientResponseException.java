@@ -10,13 +10,13 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
+@Setter
 @Getter
 public class CustomWebClientResponseException extends WebClientResponseException {
 
-    private final ClientResponse response;
-    private final URI uri;
-    private final String message;
-    @Setter
+    private ClientResponse response;
+    private URI uri;
+    private String message;
     private Object mapper;
 
     public CustomWebClientResponseException(ClientResponse response, HttpMethod method, URI uri, Object mapper) {

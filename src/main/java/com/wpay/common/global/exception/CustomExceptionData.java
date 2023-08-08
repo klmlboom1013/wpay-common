@@ -13,4 +13,5 @@ public class CustomExceptionData {
     Throwable e;
     String wtid;
     String mid;
+    Object data;
 }
