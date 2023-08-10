@@ -12,11 +12,11 @@ public class ApiUriPathVersionException extends CustomException {
         super(CustomExceptionData.builder().errorCode(ErrorCode.HTTP_STATUS_404).message(defaultErrorMessage).build());
     }
 
-    public ApiUriPathVersionException(String wtid, String mid) {
-        super(CustomExceptionData.builder().errorCode(ErrorCode.HTTP_STATUS_404).message(defaultErrorMessage).wtid(wtid).mid(mid).build());
+    public ApiUriPathVersionException(String wtid, String jnoffcId) {
+        super(CustomExceptionData.builder().errorCode(ErrorCode.HTTP_STATUS_404).message(defaultErrorMessage).wtid(wtid).jnoffcId(jnoffcId).build());
     }
 
-    public ApiUriPathVersionException(ErrorCode errorCode, String message, Throwable e, String wtid, String mid) {
-        super(CustomExceptionData.builder().errorCode(ErrorCode.HTTP_STATUS_404).message(defaultErrorMessage).wtid(wtid).mid(mid).e(e).build());
+    public ApiUriPathVersionException(ErrorCode errorCode, String message, Throwable e, String wtid, String jnoffcId) {
+        super(CustomExceptionData.builder().errorCode(ErrorCode.HTTP_STATUS_404).message(defaultErrorMessage).wtid(wtid).jnoffcId(jnoffcId).e(e).build());
     }
 }

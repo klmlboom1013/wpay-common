@@ -14,7 +14,7 @@ public interface DefaultUseCasePort extends UseCasePort {
         Activity activity = Activity.builder()
                 .jobCodes(baseCommand.getJobCodes())
                 .wtid(baseCommand.getWtid())
-                .mid(baseCommand.getJnoffcId())
+                .jnoffcId(baseCommand.getJnoffcId())
                 .serverName(baseCommand.getIdcDvdCd())
                 .build();
 

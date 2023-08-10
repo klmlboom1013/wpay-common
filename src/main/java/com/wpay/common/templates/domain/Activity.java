@@ -15,7 +15,7 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = false)
 public class Activity {
     private final JobCodes jobCodes;
-    private final String mid;
+    private final String jnoffcId;
     private final String serverName;
 
     @Setter private EntityTrnsId entityTrnsId;
@@ -23,10 +23,10 @@ public class Activity {
     @Builder
     public Activity(@NonNull JobCodes jobCodes,
                     @NonNull String wtid,
-                    @NonNull String mid,
+                    @NonNull String jnoffcId,
                     @NonNull String serverName) {
         this.jobCodes = jobCodes;
-        this.mid = mid;
+        this.jnoffcId = jnoffcId;
         this.serverName = serverName;
 
         this.entityTrnsId = EntityTrnsId.builder().wtid(wtid).build();

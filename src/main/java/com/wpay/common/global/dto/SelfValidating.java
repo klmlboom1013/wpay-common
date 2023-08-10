@@ -2,11 +2,7 @@ package com.wpay.common.global.dto;
 
 import lombok.extern.log4j.Log4j2;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import javax.validation.*;
 import java.util.Set;
 
 @Log4j2

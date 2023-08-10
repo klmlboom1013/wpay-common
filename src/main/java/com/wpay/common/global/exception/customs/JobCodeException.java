@@ -12,11 +12,11 @@ public class JobCodeException extends CustomException {
         super(CustomExceptionData.builder().errorCode(ErrorCode.HTTP_STATUS_500).message(defaultErrorMessage).build());
     }
 
-    public JobCodeException(String wtid, String mid) {
-        super(CustomExceptionData.builder().errorCode(ErrorCode.HTTP_STATUS_500).message(defaultErrorMessage).wtid(wtid).mid(mid).build());
+    public JobCodeException(String wtid, String jnoffcId) {
+        super(CustomExceptionData.builder().errorCode(ErrorCode.HTTP_STATUS_500).message(defaultErrorMessage).wtid(wtid).jnoffcId(jnoffcId).build());
     }
 
-    public JobCodeException(ErrorCode errorCode, String message, Throwable e, String wtid, String mid) {
-        super(CustomExceptionData.builder().errorCode(ErrorCode.HTTP_STATUS_500).message(defaultErrorMessage).wtid(wtid).mid(mid).e(e).build());
+    public JobCodeException(ErrorCode errorCode, String message, Throwable e, String wtid, String jnoffcId) {
+        super(CustomExceptionData.builder().errorCode(ErrorCode.HTTP_STATUS_500).message(defaultErrorMessage).wtid(wtid).jnoffcId(jnoffcId).e(e).build());
     }
 }

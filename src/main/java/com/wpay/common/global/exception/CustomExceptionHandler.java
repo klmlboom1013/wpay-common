@@ -24,20 +24,20 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler({ CustomException.class })
     protected ResponseEntity<?> handleCustomException(CustomException ex) {
-        log.error("[{}][{}] CustomException: status:{} - {}", ex.getMid(), ex.getWtid(), ex.getErrorCode(), ex.getMessage());
+        log.error("[{}][{}] CustomException: status:{} - {}", ex.getJnoffcId(), ex.getWtid(), ex.getErrorCode(), ex.getMessage());
         if(Objects.nonNull(ex.getE())) {
             this.logWriteExceptionStackTrace(ex.getE());
         } else {
             this.logWriteExceptionStackTrace(ex);
         }
 
-        /* ex에 wtid 또는 mid가 있다면 ErrorResponseV2로 세팅 한다. */
-        if(Strings.isNotBlank(ex.getWtid()) || Strings.isNotBlank(ex.getMid())){
+        /* ex에 wtid 또는 jnoffcId가 있다면 ErrorResponseV2로 세팅 한다. */
+        if(Strings.isNotBlank(ex.getWtid()) || Strings.isNotBlank(ex.getJnoffcId())){
             ErrorResponse errorResponse = ErrorResponse.builder()
                     .httpStatus(ex.getErrorCode().getStatus())
                     .message(Strings.isNotBlank(ex.getMessage()) ? ex.getMessage() : ex.getErrorCode().getMessage())
                     .error(ex.getErrorCode().getStatus().series().name().toLowerCase())
-                    .data(ErrorResponse.DefaultData.builder().mid(ex.getMid()).wtid(ex.getWtid()).build())
+                    .data(ErrorResponse.DefaultData.builder().jnoffcId(ex.getJnoffcId()).wtid(ex.getWtid()).build())
                     .build();
             return ResponseEntity.status(ex.getErrorCode().getStatus()).body(errorResponse);
         }
@@ -141,7 +141,7 @@ public class CustomExceptionHandler {
     private void logWriteExceptionStackTrace(Throwable e){
         if(e instanceof CustomException) {
             CustomException ex = (CustomException) e;
-            log.error("[{}][{}] CustomException: status:{} - {}", ex.getMid(), ex.getWtid(), ex.getErrorCode(), ex.getMessage());
+            log.error("[{}][{}] CustomException: status:{} - {}", ex.getJnoffcId(), ex.getWtid(), ex.getErrorCode(), ex.getMessage());
         } else {
             log.error("{} - {}", e.getClass().getSimpleName(), e.getMessage());
         }

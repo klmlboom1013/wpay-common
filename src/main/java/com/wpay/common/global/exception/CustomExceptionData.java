@@ -12,6 +12,6 @@ public class CustomExceptionData {
     String message;
     Throwable e;
     String wtid;
-    String mid;
+    String jnoffcId;
     Object data;
 }

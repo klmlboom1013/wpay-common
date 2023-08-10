@@ -14,7 +14,7 @@ public class CustomException extends RuntimeException {
     private ErrorCode errorCode;
     private String message;
     private String wtid;
-    private String mid;
+    private String jnoffcId;
 
     private Throwable e;
     private Object data;
@@ -33,7 +33,7 @@ public class CustomException extends RuntimeException {
         this.message = customExceptionData.getMessage();
         this.e = customExceptionData.getE();
         this.wtid = customExceptionData.getWtid();
-        this.mid = customExceptionData.getMid();
+        this.jnoffcId = customExceptionData.getJnoffcId();
         this.data=customExceptionData.getData();
     }
 
