@@ -9,6 +9,7 @@ import lombok.*;
  * Controller API RequestBody
  */
 @Getter
+@Setter
 @EqualsAndHashCode(callSuper = false)
 @ToString(callSuper = true)
 @NoArgsConstructor

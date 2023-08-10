@@ -16,6 +16,7 @@ public class PersistenceAdapterAspect extends BaseAspect {
     public void before(JoinPoint joinPoint) {
         log.info("[Before] => {}", joinPoint.getSignature().getName());
         this.validateCryptoSelf(joinPoint, true);
+
     }
 
     @After("execution(* com.wpay..adapter.out.persistence.*Persistence.*Run(..))")
