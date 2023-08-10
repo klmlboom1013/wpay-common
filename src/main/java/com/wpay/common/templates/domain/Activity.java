@@ -16,7 +16,7 @@ import lombok.*;
 public class Activity {
     private final JobCodes jobCodes;
     private final String jnoffcId;
-    private final String serverName;
+    private final String idcDvdCd;
 
     @Setter private EntityTrnsId entityTrnsId;
 
@@ -24,10 +24,10 @@ public class Activity {
     public Activity(@NonNull JobCodes jobCodes,
                     @NonNull String wtid,
                     @NonNull String jnoffcId,
-                    @NonNull String serverName) {
+                    @NonNull String idcDvdCd) {
         this.jobCodes = jobCodes;
         this.jnoffcId = jnoffcId;
-        this.serverName = serverName;
+        this.idcDvdCd = idcDvdCd;
 
         this.entityTrnsId = EntityTrnsId.builder().wtid(wtid).build();
     }
