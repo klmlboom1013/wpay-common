@@ -46,7 +46,7 @@ public class DefaultService implements DefaultUseCasePort {
                 .httpStatus(HttpStatus.OK)
                 .data(BaseResponse.DefaultData.builder()
                         .wtid("")
-                        .mid("")
+                        .jnoffcId("")
                         .build())
                 .build();
     }

@@ -30,7 +30,7 @@ class SampleRestControllerMockitoTest {
         assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
         SampleRestController.CryptEncryptDto resultDto = (SampleRestController.CryptEncryptDto) Objects.requireNonNull(responseEntity.getBody());
         System.out.println("===================");
-        System.out.println(resultDto.getData());
+        System.out.println(resultDto.getJnoffcUserId());
         System.out.println("===================");
     }
 
@@ -44,7 +44,7 @@ class SampleRestControllerMockitoTest {
         assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
         SampleRestController.CryptDecryptDto resultDto = (SampleRestController.CryptDecryptDto) Objects.requireNonNull(responseEntity.getBody());
         System.out.println("===================");
-        System.out.println(resultDto.getData());
+        System.out.println(resultDto.getJnoffcUserId());
         System.out.println("===================");
     }
 }

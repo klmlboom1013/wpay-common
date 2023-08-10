@@ -1,5 +1,6 @@
 package com.wpay.common.global.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wpay.common.global.enums.JobCodes;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -16,16 +17,17 @@ import javax.validation.constraints.Size;
 @Getter
 public abstract class BaseCommand<T> extends SelfValidating<T> {
 
+    @JsonProperty("mid")
     @NotBlank(message = "값이 Null이 될 수 없습니다.")
     @Size(min=10, max=20, message = "길이는 10~20 까지 입니다.")
-    private String mid;
+    private String jnoffcId;
 
     @NotBlank(message = "값이 Null이 될 수 없습니다.")
     @Size(max = 64, message = "길이는 최대 64 자리 입니다.")
     private String wtid;
 
     @Setter
-    private String serverName;
+    private String idcDvdCd;
 
     @Override
     public void validateSelf() {

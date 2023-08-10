@@ -1,6 +1,7 @@
 package com.wpay.common.global.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wpay.common.global.functions.DateFunctions;
 import lombok.*;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,7 @@ public class BaseResponse {
     @Getter
     public static class DefaultData {
         String wtid;
-        String mid;
+        @JsonProperty("mid")
+        String jnoffcId;
     }
 }

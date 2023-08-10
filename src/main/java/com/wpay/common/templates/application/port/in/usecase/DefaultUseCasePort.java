@@ -14,8 +14,8 @@ public interface DefaultUseCasePort extends UseCasePort {
         Activity activity = Activity.builder()
                 .jobCodes(baseCommand.getJobCodes())
                 .wtid(baseCommand.getWtid())
-                .mid(baseCommand.getMid())
-                .serverName(baseCommand.getServerName())
+                .mid(baseCommand.getJnoffcId())
+                .serverName(baseCommand.getIdcDvdCd())
                 .build();
 
         // TODO: ActivityDefault Domain Set 구현

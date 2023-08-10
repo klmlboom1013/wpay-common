@@ -89,7 +89,7 @@ public abstract class BaseAspect {
             /* API Call Version 확인 */
             baseCommand.checkVersion(request.getRequestURI().split("/")[2]);
             /* set serverName */
-            baseCommand.setServerName(DataFunctions.getIdcDvdCd.apply(request.getServerName()));
+            baseCommand.setIdcDvdCd(DataFunctions.getIdcDvdCd.apply(request.getServerName()));
             /* validation check */
             baseCommand.validateCryptoSelf();
             log.info("Validation check success!! \n[{}]", o.toString());
