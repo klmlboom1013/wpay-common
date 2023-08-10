@@ -29,9 +29,11 @@ public class SampleRestController {
         BeanUtils.copyProperties(dto, completeDto);
         log.debug(">>> {}", completeDto.toString());
 
+
+
         return ResponseEntity.ok().body(BaseResponse.builder()
                 .httpStatus(HttpStatus.OK)
-                .data(completeDto)
+                        .data(completeDto)
                 .build());
     }
 
@@ -48,10 +50,7 @@ public class SampleRestController {
         BeanUtils.copyProperties(dto, completeDto);
         log.debug(">>> {}", completeDto.toString());
 
-        return ResponseEntity.ok().body(BaseResponse.builder()
-                .httpStatus(HttpStatus.OK)
-                .data(completeDto)
-                .build());
+        return ResponseEntity.ok().body(dto);
     }
 
     @ToString

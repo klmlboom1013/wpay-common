@@ -9,8 +9,6 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.util.Objects;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -28,9 +26,8 @@ class SampleRestControllerMockitoTest {
         SampleRestController.CryptEncryptDto cryptEncryptDto = new SampleRestController.CryptEncryptDto(plainText);
         ResponseEntity<?> responseEntity = this.sampleRestController.encryptionSampleRun(cryptEncryptDto);
         assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
-        SampleRestController.CryptEncryptDto resultDto = (SampleRestController.CryptEncryptDto) Objects.requireNonNull(responseEntity.getBody());
         System.out.println("===================");
-        System.out.println(resultDto.getJnoffcUserId());
+        System.out.println(responseEntity.getBody());
         System.out.println("===================");
     }
 
@@ -42,9 +39,8 @@ class SampleRestControllerMockitoTest {
         SampleRestController.CryptDecryptDto cryptDecryptDto = new SampleRestController.CryptDecryptDto(encStr);
         ResponseEntity<?> responseEntity = this.sampleRestController.decryptionSampleRun(cryptDecryptDto);
         assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
-        SampleRestController.CryptDecryptDto resultDto = (SampleRestController.CryptDecryptDto) Objects.requireNonNull(responseEntity.getBody());
         System.out.println("===================");
-        System.out.println(resultDto.getJnoffcUserId());
+        System.out.println(responseEntity.getBody());
         System.out.println("===================");
     }
 }
