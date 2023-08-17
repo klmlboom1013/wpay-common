@@ -37,7 +37,7 @@ Configutation:
 
   Loggers:
     Root:
-      level: info
+      level: error
       AppenderRef:
         - ref: Console_Appender
 

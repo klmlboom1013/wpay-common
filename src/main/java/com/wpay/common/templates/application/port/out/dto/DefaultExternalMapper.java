@@ -13,4 +13,6 @@ import lombok.extern.log4j.Log4j2;
 @Builder
 @EqualsAndHashCode(callSuper = false)
 public class DefaultExternalMapper {
+    String eventId;
+    Object data;
 }

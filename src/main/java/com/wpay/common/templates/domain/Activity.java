@@ -1,5 +1,6 @@
 package com.wpay.common.templates.domain;
 
+import com.wpay.common.global.dto.BaseCommand;
 import com.wpay.common.global.enums.JobCodes;
 import lombok.*;
 
@@ -21,15 +22,11 @@ public class Activity {
     @Setter private EntityTrnsId entityTrnsId;
 
     @Builder
-    public Activity(@NonNull JobCodes jobCodes,
-                    @NonNull String wtid,
-                    @NonNull String jnoffcId,
-                    @NonNull String idcDvdCd) {
-        this.jobCodes = jobCodes;
-        this.jnoffcId = jnoffcId;
-        this.idcDvdCd = idcDvdCd;
-
-        this.entityTrnsId = EntityTrnsId.builder().wtid(wtid).build();
+    public Activity(BaseCommand<?> baseCommand) {
+        this.jobCodes = baseCommand.getJobCodes();
+        this.jnoffcId = baseCommand.getJnoffcId();
+        this.idcDvdCd = baseCommand.getIdcDvdCd();
+        this.entityTrnsId = EntityTrnsId.builder().wtid(baseCommand.getWtid()).build();
     }
 
     @Value

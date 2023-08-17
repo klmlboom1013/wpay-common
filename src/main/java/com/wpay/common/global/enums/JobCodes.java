@@ -1,12 +1,10 @@
 package com.wpay.common.global.enums;
 
-import com.sun.istack.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
 
-import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 
 @Log4j2
@@ -17,7 +15,8 @@ public enum JobCodes {
     JOB_CODE_18("18", "휴대폰 본인 인증 번호 SMS 발송 요청."),
     JOB_CODE_19("19", "휴대폰 본인 인증 인증 번호 확인 요청."),
     JOB_CODE_20("20", "MPI 기준 정보 조회"),
-    JOB_CODE_ZZ("ZZ", "테스트 용")
+    JOB_CODE_ZZ("ZZ", "테스트 용"),
+    JOB_CODE_EV("EV", "이벤트 테스트 용")
     ;
 
     @Getter private final String code;

@@ -19,12 +19,13 @@ class DefaultWebController {
     private final PortInFactory portInFactory;
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping(path = "/templates/default/{version}")
+    @PostMapping(path = "/templates/{version}/default")
     ResponseEntity<?> defaults (@PathVariable String version, @RequestBody DefaultCommand command) {
-        return ResponseEntity.ok().body(
-                portInFactory.getUseCasePort(
-                        DefaultUseCaseVersion.getInstance(version).toString(),
-                        command.getJobCodes().getCode())
-                        .execute(command));
+
+        Object result = portInFactory.getUseCasePort(
+                DefaultUseCaseVersion.getInstance(version).toString(),
+                command.getJobCodes().toString()).execute(command);
+
+        return ResponseEntity.ok().body(result);
     }
 }

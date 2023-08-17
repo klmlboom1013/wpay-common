@@ -10,13 +10,10 @@ public interface DefaultUseCasePort extends UseCasePort {
 
     @Override
     default BaseResponse execute(SelfValidating<?> selfValidating){
-        final BaseCommand<?> baseCommand = (BaseCommand<?>) selfValidating;
-        Activity activity = Activity.builder()
-                .jobCodes(baseCommand.getJobCodes())
-                .wtid(baseCommand.getWtid())
-                .jnoffcId(baseCommand.getJnoffcId())
-                .idcDvdCd(baseCommand.getIdcDvdCd())
+        final Activity activity = Activity.builder()
+                .baseCommand((BaseCommand<?>) selfValidating)
                 .build();
+
 
         // TODO: ActivityDefault Domain Set 구현
 

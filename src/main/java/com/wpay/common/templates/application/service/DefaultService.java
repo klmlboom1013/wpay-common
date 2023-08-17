@@ -10,6 +10,7 @@ import com.wpay.common.templates.application.port.out.dto.DefaultExternalMapper;
 import com.wpay.common.templates.application.port.out.external.DefaultExternalPort;
 import com.wpay.common.templates.application.port.out.persistence.DefaultPersistencePort;
 import com.wpay.common.templates.domain.Activity;
+import com.wpay.common.templates.domain.CompleteDefault;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -40,13 +41,14 @@ public class DefaultService implements DefaultUseCasePort {
         final DefaultPersistencePort defaultPersistencePort = this.getPersistencePort();
 
         final DefaultExternalMapper externalMapper = defaultExternalPort.defaultRun(activity);
-        final DefaultExternalMapper persistenceMapper = defaultExternalPort.defaultRun(activity);
 
         return BaseResponse.builder()
                 .httpStatus(HttpStatus.OK)
-                .data(BaseResponse.DefaultData.builder()
-                        .wtid("")
-                        .jnoffcId("")
+                .data(CompleteDefault.builder()
+                        .eventId(externalMapper.getEventId())
+                        .eventResultData(externalMapper.getData())
+                        .wtid(activity.getEntityTrnsId().getWtid())
+                        .jnoffcId(activity.getJnoffcId())
                         .build())
                 .build();
     }

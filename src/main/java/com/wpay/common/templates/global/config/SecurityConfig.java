@@ -14,7 +14,7 @@ public class SecurityConfig {
     @Bean(value = "templatesSecurityFilterChain")
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         // 접근 권한 제어 예외 URI 등록
-        http.antMatcher("/templates/*");
+        http.antMatcher("/*");
         return http.build();
     }
 }

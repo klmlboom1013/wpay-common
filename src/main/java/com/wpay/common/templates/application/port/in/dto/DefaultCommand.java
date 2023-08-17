@@ -19,6 +19,12 @@ public class DefaultCommand extends BaseCommand<DefaultCommand> {
     private String data1;
     private String data2;
 
+    public DefaultCommand (String data1, String data2, String wtid, String jnoffcId) {
+        super(wtid, jnoffcId, null);
+        this.data1=data1;
+        this.data2=data2;
+    }
+
     @Override
     public void checkVersion(String version) {
         DefaultUseCaseVersion.getInstance(version);
