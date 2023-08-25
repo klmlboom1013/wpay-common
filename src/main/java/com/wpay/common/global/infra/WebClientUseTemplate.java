@@ -11,12 +11,12 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientRequestException;
 import reactor.core.publisher.Mono;
 
-import javax.ws.rs.core.MediaType;
 import java.net.URI;
 
 @Log4j2
@@ -27,7 +27,7 @@ public class WebClientUseTemplate {
                                                 @NonNull URI connUrl) {
         try {
             return webClient.get().uri(connUrl)
-                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
+                    .header(HttpHeaders.CONTENT_TYPE, String.valueOf(MediaType.APPLICATION_FORM_URLENCODED))
                     .retrieve()
                     .onStatus(HttpStatus::is4xxClientError, response ->
                             Mono.error(new CustomWebClientRequestException(response, HttpMethod.POST, connUrl, null)))
